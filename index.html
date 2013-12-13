@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+    <title>Test navigator.geolocation.getCurrentPosition</title>
+</head>
+<body>
+    <button type="button" onclick="maximumAge0()">maximumAge: 0</button>
+    <button type="button" onclick="maximumAgeNo()">maximumAge not set</button>
+    
+    <script language="JavaScript">
+        function maximumAge0(){
+            navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 60000, maximumAge: 0});       
+        }
+        
+        function maximumAgeNo(){
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);       
+        }
+        
+        function onSuccess(position) {
+  		    alert('GPS works fine!' +
+                  'Latitude: '          + position.coords.latitude          + '\n' +
+                  'Longitude: '         + position.coords.longitude         + '\n' +
+                  'Altitude: '          + position.coords.altitude          + '\n' +
+                  'Accuracy: '          + position.coords.accuracy          + '\n' +
+                  'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+                  'Heading: '           + position.coords.heading           + '\n' +
+                  'Speed: '             + position.coords.speed             + '\n' +
+                  'Timestamp: '         + position.timestamp                + '\n' +
+                  'Time from position: '+ (new Date(position.timestamp))    + '\n' +
+                  'Current time: '      + new Date()                        + '\n');  
+        };
+    
+        // onError Callback receives a PositionError object
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        };
+    
+    </script>             
+</body>
+</html>

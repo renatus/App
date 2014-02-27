@@ -1,42 +1,25 @@
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
-<head>
-    <title>Test navigator.geolocation.getCurrentPosition</title>
-</head>
-<body>
-    <button type="button" onclick="maximumAge0()">maximumAge: 0</button>
-    <button type="button" onclick="maximumAgeNo()">maximumAge not set</button>
-    
-    <script language="JavaScript">
-        function maximumAge0(){
-            navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 60000, maximumAge: 0});       
-        } 
-        
-        function maximumAgeNo(){
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);       
-        }
-        
-        function onSuccess(position) {
-  		    alert('GPS works fine!' +
-                  'Latitude: '          + position.coords.latitude          + '\n' +
-                  'Longitude: '         + position.coords.longitude         + '\n' +
-                  'Altitude: '          + position.coords.altitude          + '\n' +
-                  'Accuracy: '          + position.coords.accuracy          + '\n' +
-                  'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-                  'Heading: '           + position.coords.heading           + '\n' +
-                  'Speed: '             + position.coords.speed             + '\n' +
-                  'Timestamp: '         + position.timestamp                + '\n' +
-                  'Time from position: '+ (new Date(position.timestamp))    + '\n' +
-                  'Current time: '      + new Date()                        + '\n');  
-        };
-    
-        // onError Callback receives a PositionError object
-        function onError(error) {
-            alert('code: '    + error.code    + '\n' +
-                  'message: ' + error.message + '\n');
-        };
-    
-    </script>             
-</body>
+
+  <head>
+    <script data-require="angular.js@*" data-semver="1.2.10" src="http://code.angularjs.org/1.2.10/angular.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="js/script.js"></script>
+  </head>
+
+  <body>
+    <div data-ng-app="indexDBSample" data-ng-controller="TodoController as vm">
+      <table>
+        <tr data-ng-repeat="todo in vm.todos">
+          <td>{{todo.text}}</td>
+          <td>[<a href="#" data-ng-click="vm.deleteTodo(todo.id)">X</a>]</td>
+        </tr>
+      </table>
+      <br />
+      <input type="text" data-ng-model="vm.todoText" name="todo" placeholder="What's pending?" style="width: 200px;" />
+      <input type="button" value="Add" data-ng-click="vm.addTodo()" />
+      <input type="button" value="Refresh" data-ng-click="vm.refreshList()" />
+    </div>
+  </body>
+
 </html>

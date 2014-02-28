@@ -21,6 +21,16 @@
       <input type="button" value="Add" data-ng-click="vm.addTodo()" />
       <input type="button" value="Refresh" data-ng-click="vm.refreshList()" />
     </div>
+    
+      
+      
+    <div data-ng-app="AngularTest">
+        <p>Write some text in textbox:</p>
+        <input type="text" ng-model="sometext" />
+        
+        <h1>Hello {{ sometext }}</h1>
+    </div>
+      
   </body>
 
 </html>

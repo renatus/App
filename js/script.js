@@ -57,7 +57,6 @@ app.factory('indexedDBDataSvc', function($window, $q){
           deferred.resolve(todos);
         }
         else{
-            alert(result.value);
           todos.push(result.value);
           if(result.value.id > lastIndex){
             lastIndex=result.value.id;

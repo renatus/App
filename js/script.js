@@ -180,6 +180,10 @@ function maximumAge0(){
     navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true, timeout: 60000, maximumAge: 0});
 }
 
+function maximumAge0false(){
+    navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:false, timeout: 60000, maximumAge: 0});
+}
+
 function maximumAgeNo(){
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }

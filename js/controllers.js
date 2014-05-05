@@ -1,4 +1,4 @@
-var phonecatApp = angular.module('startApp', ['exoFilters']);
+var phonecatApp = angular.module('testApp', ['exoFilters']);
 
 phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     
@@ -8,39 +8,9 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     
     
-    $scope.i18nEntries = [
-        {"nid":1, "title":{"en":"TitleEn", "ru":"titleRu"}}, {"nid":2, "title":{"en":"English", "ru":"Russian"}}
-    ];
-    
-    
-    
-    
     
     
 
-
-
-	$scope.manyEntries = [];
-	var allEntries = [];
-
-	for (var i = 0; i < 1000; i++) {
-		var newEntry = {"nid":i, "text":"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
-
-		allEntries.push(newEntry);
-		//$scope.manyEntries.push(newEntry);
-	}
-	$scope.manyEntries = allEntries;
-
-
-
-	$scope.filter50 = function(manyEntry){
-
-        if(manyEntry.nid < $scope.manyNID && manyEntry.nid > ($scope.manyNID - 50)){
-            return true; // this will be listed in the results
-        }
-
-        return false; // otherwise it won't be within the results
-    };
 
 
 

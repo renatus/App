@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="startApp">
+<html ng-app="testApp">
 <head>
 	<title>Test AngularJS app</title>
     <script type="text/javascript" src="libs/angular.js"></script>
@@ -21,14 +21,7 @@
 		<option value="Russian">Russian</option>
 	</select>
 	
-	<select ng-model="nodeid">
-		<option value=3188>3187</option>
-		<option value=6533>6533</option>
-	</select>
-	
-	
 	<ul>
-        <!--<li ng-repeat="activity in activities | filter:query | filter:lang | tstfilter | orderBy:orderProp">-->
 		<li ng-repeat="activity in activities | filter:query | filter:lang | filter:filterFn |  orderBy:orderProp">			
 			<span ng-hide="editing" ng-click="editing = true">{{activity.title}} | {{activity.language}}</span>
 			<form ng-show="editing" ng-submit="editing = false">
@@ -59,43 +52,6 @@
         <button class="btn" type="submit">Add</button>
 		{{activity2.title}}
     </form>
-    
-    
-    
-    <br/>
-    <!--<button class="btn" ng-click="addEnttry()">Add</button>-->
-    <br/>
-    
-    
-
-    
-    
-    <input ng-model="greeting" type="text"><br>
-    No filter: {{greeting}}<br>
-    Reverse: {{greeting|reverse}}<br>
-	
-	<br/>
-	<br/>
-	<br/>
-	
-	
-	
-	Search: <input ng-model="manyQuery"><br/>
-	Nid: <input type="text" ng-model="manyNID" placeholder="200" ng-required/>
-	<ul>
-		<li ng-repeat="manyEntry in manyEntries | filter:manyQuery | filter:filter50">			
-			{{manyEntry.nid}}<br>
-		</li>
-	</ul>
-    
-    
-    
-    <!--AngularJS i18n -->
-    <ul>
-		<li ng-repeat="i18nEntry in i18nEntries">			
-			{{i18nEntry.title.ru}}<br>
-		</li>
-	</ul>
 
 
      

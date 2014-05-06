@@ -29,7 +29,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     $scope.filterFn = function(activity){
         
-        if(activity.status == "Completed"){
+        if(activity.langcode == "en"){
             return true; // this will be listed in the results
         }
         

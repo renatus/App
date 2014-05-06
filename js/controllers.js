@@ -38,28 +38,25 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
 	
 	
 	
+    //Open DB, get all entries and show them to user
 	$scope.init = function(){
-		indexedDBexo.open().then(function(){
-			//indexedDBexo.addEntry('TestTitle1').then(function(){
-			//	console.log('Activity added!');
-			//});
-            
+		indexedDBexo.open().then(function(){            
             indexedDBexo.getAllTodoItems().then(function(data){
 				$scope.activities2 = data;
                 console.log(data);
-			});
-			
+			});			
 		});
 	}
 	
 	$scope.init();
     
-    $scope.addEntry = function(){
-		//console.log($scope.activity2.title);
-        
+    
+    
+    $scope.addEntry = function(){        
         var newEntry = {
 			"title": $scope.activity2.title,
             "language": "English",
+            "langcode": "en",
 			"timeStamp": new Date().getTime()
 		};
         $scope.activities2.push(newEntry);
@@ -75,6 +72,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
 
 
 
+//Service to work with IndexedDB
 phonecatApp.service('indexedDBexo', function($window, $q){
 	
 	//IndexedDB database name
@@ -153,7 +151,7 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 	
 	
 	
-	//Add entry to DB
+	//Add Activity entry to DB
 	this.addEntry = function(titleText){
 		var deferred = $q.defer();
 		
@@ -167,6 +165,7 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 		var data = {
 			"title": titleText,
             "language": "English",
+            "langcode": "en",
 			"timeStamp": new Date().getTime()
 		};
 		

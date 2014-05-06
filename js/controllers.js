@@ -52,24 +52,26 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     
     
-    $scope.addEntry = function(){        
+    $scope.addEntry = function(){
+        curTimestamp = new Date().getTime();
+        
         var newEntry = {
 			"title": $scope.activity.title,
             "language": "English",
             "langcode": "en",
-			"timeStamp": new Date().getTime()
+			"timeStamp": curTimestamp
 		};
         $scope.activities.push(newEntry);
         
-        indexedDBexo.addEntry($scope.activity.title).then(function(){
+        indexedDBexo.addEntry(curTimestamp).then(function(){
             console.log('Activity added!');
         });
     }
     
     
     
-    $scope.editEntry = function(){
-        alert('a');
+    $scope.editEntry = function(timeStamp){
+        alert(timeStamp);
     }
     
     

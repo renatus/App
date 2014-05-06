@@ -42,7 +42,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
 	$scope.init = function(){
 		indexedDBexo.open().then(function(){            
             indexedDBexo.getAllTodoItems().then(function(data){
-				$scope.activities2 = data;
+				$scope.activities = data;
                 console.log(data);
 			});			
 		});
@@ -54,14 +54,14 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     $scope.addEntry = function(){        
         var newEntry = {
-			"title": $scope.activity2.title,
+			"title": $scope.activity.title,
             "language": "English",
             "langcode": "en",
 			"timeStamp": new Date().getTime()
 		};
-        $scope.activities2.push(newEntry);
+        $scope.activities.push(newEntry);
         
-        indexedDBexo.addEntry($scope.activity2.title).then(function(){
+        indexedDBexo.addEntry($scope.activity.title).then(function(){
             console.log('Activity added!');
         });
     }

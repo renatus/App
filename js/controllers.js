@@ -67,6 +67,12 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     }
     
     
+    
+    $scope.editEntry = function(){
+        alert('a');
+    }
+    
+    
 
 });
 

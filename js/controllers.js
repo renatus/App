@@ -53,9 +53,12 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     
     $scope.addEntry = function(){
-        curTimestamp = new Date().getTime();
+        var curTimestamp = new Date().getTime();
+        var UUID4 = generateUUID();
+        alert(UUID4);
         
         var newEntry = {
+            "UUID4": UUID4;
 			"title": $scope.activity.title,
             "language": "English",
             "langcode": "en",
@@ -271,5 +274,3 @@ function generateUUID(){
     });
     return uuid;
 };
-
-generateUUID();

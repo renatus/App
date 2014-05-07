@@ -265,7 +265,8 @@ angular.module('exoFilters', []).filter('reverse', function() {
 
 
 
-//Generate UUID version 4 (based on random or pseudo-random number)
+//Generate UUID version 4 (based on random or pseudo-random number), something like 20fbd631-75ce-4d27-a920-35ad76608dd7
+//Version 4 UUIDs have the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, A, or B.
 //Math.random() may return not that random results, so we add current timestamp to make UUID collisions less probable
 function generateUUID4(){
     var curDate = new Date().getTime();

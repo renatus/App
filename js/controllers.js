@@ -55,7 +55,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     $scope.addEntry = function(){
         var curTimestamp = new Date().getTime();
         var UUID4 = generateUUID4();
-        alert(UUID4);
+        console.log(UUID4);
         
         var newEntry = {
             "UUID4": UUID4,
@@ -266,7 +266,7 @@ angular.module('exoFilters', []).filter('reverse', function() {
 
 
 //Generate UUID version 4 (based on random or pseudo-random number)
-//Math.random() may return not that random results, so we add current timestamp to make collisions less probable
+//Math.random() may return not that random results, so we add current timestamp to make UUID collisions less probable
 function generateUUID4(){
     var curDate = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {

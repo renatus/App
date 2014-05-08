@@ -270,7 +270,8 @@ angular.module('exoFilters', []).filter('reverse', function() {
 //Math.random() may return not that random results, so we add current timestamp to make UUID collisions less probable
 function generateUUID4(){
     var curDate = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    //var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var uuid = 'xxxxxxxx-xxxx-4xxx-axxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = (curDate + Math.random() * 16)%16 | 0;
         curDate = Math.floor(curDate / 16);
         return (c == 'x' ? r : (r&0x7|0x8)).toString(16);

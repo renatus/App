@@ -279,7 +279,7 @@ function generateUUID4(){
     
     var uuid = uuidY.replace(/[y]/g, function(c) {
         //array length = 5;
-        var arr = [a, b, 8, 9];
+        var arr = ['a', 'b', 8, 9];
         
         //rand = 0.9999;
         var rand = Math.random();

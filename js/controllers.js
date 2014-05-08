@@ -278,10 +278,17 @@ function generateUUID4(){
     });
     
     var uuid = uuidY.replace(/[y]/g, function(c) {
-        //var r = (curDate + Math.random() * 16)%16 | 0;
-        //curDate = Math.floor(curDate / 16);
-        //return (c == 'x' ? r : (r&0x7|0x8)).toString(16);
-        return "b";
+        //array length = 5;
+        var arr = [a, b, 8, 9];
+        
+        //rand = 0.9999;
+        var rand = Math.random();
+        //rand = 4.9995
+        rand *= arr.length; //(5)
+        //rand = 4 - safely within the bounds of your array
+        rand = Math.floor(rand);
+        
+        return arr[rand];
     });
     
     

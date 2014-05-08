@@ -271,10 +271,19 @@ angular.module('exoFilters', []).filter('reverse', function() {
 function generateUUID4(){
     var curDate = new Date().getTime();
     //var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[x]/g, function(c) {
+    var uuidY = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[x]/g, function(c) {
         var r = (curDate + Math.random() * 16)%16 | 0;
         curDate = Math.floor(curDate / 16);
         return (c == 'x' ? r : (r&0x7|0x8)).toString(16);
     });
+    
+    var uuid = uuidY.replace(/[y]/g, function(c) {
+        //var r = (curDate + Math.random() * 16)%16 | 0;
+        //curDate = Math.floor(curDate / 16);
+        //return (c == 'x' ? r : (r&0x7|0x8)).toString(16);
+        return "b";
+    });
+    
+    
     return uuid;
 };

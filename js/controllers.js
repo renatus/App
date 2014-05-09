@@ -294,3 +294,28 @@ function generateUUID4(){
     
     return uuid;
 };
+
+
+
+function UUID() {
+    var uuid = (function () {
+        var i,
+            c = "89ab",
+            u = [];
+        for (i = 0; i < 36; i += 1) {
+            u[i] = (Math.random() * 16 | 0).toString(16);
+        }
+        u[8] = u[13] = u[18] = u[23] = "-";
+        u[14] = "4";
+        u[19] = c.charAt(Math.random() * 4 | 0);
+        return u.join("");
+    })();
+    return {
+        toString: function () {
+            return uuid;
+        },
+        valueOf: function () {
+            return uuid;
+        }
+    };
+}

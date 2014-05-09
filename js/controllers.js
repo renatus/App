@@ -268,48 +268,28 @@ angular.module('exoFilters', []).filter('reverse', function() {
 //Generate UUID version 4 (based on random or pseudo-random number), something like 20fbd631-75ce-4d27-a920-35ad76608dd7
 //Version 4 UUIDs have the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, a, or b.
 //Math.random() may return not that random results, so we add current timestamp to make UUID collisions less probable
-//function generateUUID4(){
-function generateUUID5(){
+function generateUUID4(){
     var curDate = new Date().getTime();
+    //Replace x characters one by one by hexadecimal numbers (0-9, a-f)
     var uuidY = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[x]/g, function(c) {
         var r = (curDate + Math.random() * 16)%16 | 0;
         curDate = Math.floor(curDate / 16);
         return (c == 'x' ? r : (r&0x7|0x8)).toString(16);
     });
     
+    //Replace y character by either a, or b, or 8, or 9.
     var uuid = uuidY.replace(/[y]/g, function(c) {
-        //array length = 5;
-        var arr = ['a', 'b', 8, 9];
-        
-        //rand = 0.9999;
+        var symbolPool = ['a', 'b', 8, 9];
+        //Generate random number between 0 and 1 (say, 0.99)
         var rand = Math.random();
-        //rand = 4.9995
-        rand *= arr.length; //(5)
-        //rand = 4 - safely within the bounds of your array
+        //Multiply it by symbol pool length, so we'll get number between 0 and n-1, where n is symbol pool length
+        rand = rand * symbolPool.length;
+        //Round a number downward to its nearest integer
         rand = Math.floor(rand);
-        
+        //Return randomly selected array element
         return arr[rand];
     });
     
-    
+    //Return UUID version 4
     return uuid;
-};
-
-
-
-function generateUUID4(){
-    symbolPool = "89ab",
-    symbolArr = [];
-    var curDate = new Date().getTime();
-    for (var i = 0; i < 36; i += 1) {
-        //symbolArr[i] = (Math.random() * 16 | 0).toString(16);
-        var r = (curDate + Math.random() * 16)%16 | 0;
-        curDate = Math.floor(curDate / 16);
-        symbolArr[i] = (r&0x7|0x8).toString(16);
-    }
-    
-    symbolArr[8] = symbolArr[13] = symbolArr[18] = symbolArr[23] = "-";
-    symbolArr[14] = "4";
-    symbolArr[19] = symbolPool.charAt(Math.random() * 4 | 0);
-    return symbolArr.join("");
 };

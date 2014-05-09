@@ -304,7 +304,7 @@ function generateUUID4(){
     for (var i = 0; i < 36; i += 1) {
         //symbolArr[i] = (Math.random() * 16 | 0).toString(16);
         var r = (curDate + Math.random() * 16)%16 | 0;
-        symbolArr[i] = (c == 'x' ? r : (r&0x7|0x8)).toString(16);
+        symbolArr[i] = (r : (r&0x7|0x8)).toString(16);
     }
     
     symbolArr[8] = symbolArr[13] = symbolArr[18] = symbolArr[23] = "-";

@@ -297,8 +297,7 @@ function generateUUID4(){
 
 
 
-function UUID() {
-    var uuid = (function () {
+var uuid = (function () {
         var i,
             c = "89ab",
             u = [];
@@ -309,13 +308,4 @@ function UUID() {
         u[14] = "4";
         u[19] = c.charAt(Math.random() * 4 | 0);
         return u.join("");
-    })();
-    return {
-        toString: function () {
-            return uuid;
-        },
-        valueOf: function () {
-            return uuid;
-        }
-    };
-}
+})

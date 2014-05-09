@@ -287,7 +287,7 @@ function generateUUID4(){
         //Round a number downward to its nearest integer
         rand = Math.floor(rand);
         //Return randomly selected array element
-        return arr[rand];
+        return symbolPool[rand];
     });
     
     //Return UUID version 4

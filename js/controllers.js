@@ -266,12 +266,11 @@ angular.module('exoFilters', []).filter('reverse', function() {
 
 
 //Generate UUID version 4 (based on random or pseudo-random number), something like 20fbd631-75ce-4d27-a920-35ad76608dd7
-//Version 4 UUIDs have the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, A, or B.
+//Version 4 UUIDs have the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, a, or b.
 //Math.random() may return not that random results, so we add current timestamp to make UUID collisions less probable
 //function generateUUID4(){
 function generateUUID5(){
     var curDate = new Date().getTime();
-    //var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     var uuidY = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[x]/g, function(c) {
         var r = (curDate + Math.random() * 16)%16 | 0;
         curDate = Math.floor(curDate / 16);
@@ -301,8 +300,11 @@ function generateUUID5(){
 function generateUUID4(){
     symbolPool = "89ab",
     symbolArr = [];
+    var curDate = new Date().getTime();
     for (var i = 0; i < 36; i += 1) {
-        symbolArr[i] = (Math.random() * 16 | 0).toString(16);
+        //symbolArr[i] = (Math.random() * 16 | 0).toString(16);
+        var r = (curDate + Math.random() * 16)%16 | 0;
+        symbolArr[i] = (c == 'x' ? r : (r&0x7|0x8)).toString(16);
     }
     
     symbolArr[8] = symbolArr[13] = symbolArr[18] = symbolArr[23] = "-";

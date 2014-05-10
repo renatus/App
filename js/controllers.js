@@ -185,6 +185,8 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");
 		var store = transact.objectStore(dbTableName);
 		
+        console.log(entry.timestamp);
+        
 		var data = {
             "uuid": entry.uuid,
 			"title": entry.title,

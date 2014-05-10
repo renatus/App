@@ -72,13 +72,13 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
             var result = $scope.activities[i];
             if(result.uuid === UUID4){
                 //return result;
-                console.log(result.uuid);
+                console.log(result.langcode);
             }
         }
         
         
         
-        indexedDBexo.addEntry(UUID4).then(function(){
+        indexedDBexo.addEntry(newEntry).then(function(){
             console.log('Activity added!');
         });
     }
@@ -175,7 +175,7 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 	
 	
 	//Add Activity entry to DB
-	this.addEntry = function(UUID4){
+	this.addEntry = function(entry){
 		var deferred = $q.defer();
 		
 		//Database table name
@@ -184,16 +184,13 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 		//Create transaction, define Object stores it will cover
 		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");
 		var store = transact.objectStore(dbTableName);
-        
-        
-        
-        var titleText = UUID4;
 		
 		var data = {
-			"title": titleText,
-            "language": "English",
-            "langcode": "en",
-			"timeStamp": new Date().getTime()
+            "uuid": entry.uuid,
+			"title": entry.title,
+            "language": entry.language,
+            "langcode": entry.langcode,
+			"timeStamp": entry.timestamp
 		};
 		
 		//Request to store data at DB

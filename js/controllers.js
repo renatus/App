@@ -178,7 +178,7 @@ phonecatApp.service('indexedDBexo', function($window, $q){
             var result = activities[i];
             if(result.uuid === UUID4){
                 //return result;
-                return result.uuid;
+                console.log(result.uuid);
             }
         }
         

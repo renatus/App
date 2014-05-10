@@ -55,10 +55,9 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     $scope.addEntry = function(){
         var curTimestamp = new Date().getTime();
         var UUID4 = generateUUID4();
-        console.log(UUID4);
         
         var newEntry = {
-            "UUID4": UUID4,
+            "uuid": UUID4,
 			"title": $scope.activity.title,
             "language": "English",
             "langcode": "en",
@@ -242,10 +241,6 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 
 
 
-
-
-
-
 angular.module('exoFilters', []).filter('reverse', function() {
 	return function(input, uppercase) {
 		input = input || '';
@@ -267,38 +262,6 @@ angular.module('exoFilters', []).filter('reverse', function() {
 
 //Generate UUID version 4 (based on random or pseudo-random number), something like 20fbd631-75ce-4d27-a920-35ad76608dd7
 //Version 4 UUIDs have the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, a, or b.
-//Math.random() may return not that random results, so we could add current timestamp to make UUID collisions less probable
-//But if we're dealing with two truly random generators, it will make result less random
-//So as far as Math.random() is seeded from the current time, it may be not that good idea
-function UUID4(){
-    var curDate = new Date().getTime();
-    //Replace x characters one by one by hexadecimal numbers (0-9, a-f)
-    var uuidY = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[x]/g, function(c) {
-        var r = (curDate + Math.random() * 16)%16 | 0;
-        curDate = Math.floor(curDate / 16);
-        return (c == 'x' ? r : (r&0x7|0x8)).toString(16);
-    });
-    
-    //Replace y character by either a, or b, or 8, or 9.
-    var uuid = uuidY.replace(/[y]/g, function(c) {
-        var symbolPool = ['a', 'b', 8, 9];
-        //Generate random number between 0 and 1 (say, 0.99)
-        var rand = Math.random();
-        //Multiply it by symbol pool length, so we'll get number between 0 and n-1, where n is symbol pool length
-        rand = rand * symbolPool.length;
-        //Round a number downward to its nearest integer
-        rand = Math.floor(rand);
-        //Return randomly selected array element
-        return symbolPool[rand];
-    });
-    
-    //Return UUID version 4
-    return uuid;
-};
-
-
-//Generate UUID version 4 (based on random or pseudo-random number), something like 20fbd631-75ce-4d27-a920-35ad76608dd7
-//Version 4 UUIDs have the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, a, or b.
 //First number of a forth part determines the variant (currently only 1 in use); If it is one of 8,9,a,b, it is correct
 //0-7 are reserved for backward compatibility, c,d are reserved for Microsoft, and e,f are reserved for future use)
 //First number of a third part determines version - in our case it should be 4
@@ -309,10 +272,4 @@ function generateUUID4(){
     });
     
     return uuid;
-}
-
-
-
-function twou() {
-    return generateUUID4() + " " + generateUUID4();
 }

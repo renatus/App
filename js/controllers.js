@@ -65,7 +65,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
 		};
         $scope.activities.push($scope.activity.title);
         
-        indexedDBexo.addEntry(curTimestamp).then(function(){
+        indexedDBexo.addEntry(UUID4).then(function(){
             console.log('Activity added!');
         });
     }
@@ -162,7 +162,7 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 	
 	
 	//Add Activity entry to DB
-	this.addEntry = function(titleText){
+	this.addEntry = function(UUID4){
 		var deferred = $q.defer();
 		
 		//Database table name
@@ -171,6 +171,8 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 		//Create transaction, define Object stores it will cover
 		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");
 		var store = transact.objectStore(dbTableName);
+        
+        var titleText = UUID4;
 		
 		var data = {
 			"title": titleText,

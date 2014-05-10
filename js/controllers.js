@@ -63,7 +63,6 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
             "langcode": "en",
 			"timeStamp": curTimestamp
 		};
-        console.log(newEntry.timeStamp);
         $scope.activities.push(newEntry);
         
         
@@ -79,7 +78,6 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         
         
-        console.log(newEntry.timeStamp);
         indexedDBexo.addEntry(newEntry).then(function(){
             console.log('Activity added!');
         });
@@ -186,8 +184,6 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 		//Create transaction, define Object stores it will cover
 		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");
 		var store = transact.objectStore(dbTableName);
-		
-        console.log(exEntry.timeStamp);
         
 		var data = {
             "uuid": exEntry.uuid,

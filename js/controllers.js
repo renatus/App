@@ -63,6 +63,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
             "langcode": "en",
 			"timeStamp": curTimestamp
 		};
+        console.log(newEntry.timestamp);
         $scope.activities.push(newEntry);
         
         

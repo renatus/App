@@ -267,8 +267,10 @@ angular.module('exoFilters', []).filter('reverse', function() {
 
 //Generate UUID version 4 (based on random or pseudo-random number), something like 20fbd631-75ce-4d27-a920-35ad76608dd7
 //Version 4 UUIDs have the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, a, or b.
-//Math.random() may return not that random results, so we add current timestamp to make UUID collisions less probable
-function generateUUID4(){
+//Math.random() may return not that random results, so we could add current timestamp to make UUID collisions less probable
+//But if we're dealing with two truly random generators, it will make result less random
+//So as far as Math.random() is seeded from the current time, it may be not that good idea
+function UUID4(){
     var curDate = new Date().getTime();
     //Replace x characters one by one by hexadecimal numbers (0-9, a-f)
     var uuidY = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[x]/g, function(c) {
@@ -295,10 +297,22 @@ function generateUUID4(){
 };
 
 
-function generateUUID5(){
-var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-    return v.toString(16);
-});
+//Generate UUID version 4 (based on random or pseudo-random number), something like 20fbd631-75ce-4d27-a920-35ad76608dd7
+//Version 4 UUIDs have the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, a, or b.
+//First number of a forth part determines the variant (currently only 1 in use); If it is one of 8,9,a,b, it is correct
+//0-7 are reserved for backward compatibility, c,d are reserved for Microsoft, and e,f are reserved for future use)
+//First number of a third part determines version - in our case it should be 4
+function generateUUID4(){
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(16);
+    });
+    
     return uuid;
+}
+
+
+
+function twou() {
+    return generateUUID4() + " " + generateUUID4();
 }

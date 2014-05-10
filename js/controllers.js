@@ -172,6 +172,18 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");
 		var store = transact.objectStore(dbTableName);
         
+        
+        
+        for(var i = 0; i < activities.length; i++){
+            var result = activities[i];
+            if(result.uuid === UUID4){
+                //return result;
+                return result.uuid;
+            }
+        }
+        
+        
+        
         var titleText = UUID4;
 		
 		var data = {

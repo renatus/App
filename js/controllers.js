@@ -285,20 +285,25 @@ function generateUUID4(){
     //all found x symbols will be replaced with randomly picked hexadecimal digits (1-9, a-f) one by one
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         
+        //Math.random will give us not that random results, so UUID collisions are possible
+        //It is preferable to use window.crypto.getRandomValues() function - it gives cryptographically-grade pseudo-random values
+        //window.crypto.getRandomValues() is not available in older browsers, so we should fallback to Math.random() if needed
+        //randNum variable should contain number between 0 and 15
         var randNum = "";
+        //if window.crypto.getRandomValues() is available
         if(window.crypto){
+            //Create one-element array (counting starts from 1, not from 0). 
             var randArr = new Uint32Array(1);
+            //Each array element will be populated with random value, so you can get many numbers in a time.
             window.crypto.getRandomValues(randArr);
+            //% will give us division remainder, in our caseit will be a number between 0 and 15
             randNum = randArr[0] % 16;
-            console.log("window.crypto.getRandomValues " + randNum);
         } else {
+            //Math.random() will give us pseudorandom number between 0 and 1
+            // |0 - bitwise operation OR will drop fraction part of the number
             randNum = Math.random()*16|0;
-            console.log("Math.random " + randNum);
         }
         
-        
-        //Math.random() will give us pseudorandom number between 0 and 1
-        // |0 - bitwise operation OR will drop fraction part of the number
         //v = c == 'x'  - if current symbol is not equal to x
         //r : (r&0x3|0x8)  - v will be populated with hexadecimal number between 8 and 11 (i.e. 8, 9, a, b)
         var r = randNum, v = c == 'x' ? r : (r&0x3|0x8);

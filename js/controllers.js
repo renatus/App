@@ -278,7 +278,7 @@ angular.module('exoFilters', []).filter('reverse', function() {
 //Version 4 UUIDs have the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, a, or b.
 //First number of a forth part determines the variant (currently only 1 in use); If it is one of 8,9,a,b, it is correct
 //0-7 are reserved for backward compatibility, c,d are reserved for Microsoft, and e,f are reserved for future use)
-//First number of a third part determines version - in our case it should be 4
+//First number of a third part determines version - in our case it should be 4, as we use UUID version 4
 function generateUUID4(){
     //Square brackets means we should find any character between the brackets (not necessary exact sequence)
     // /g modifier means we should search for all x an y symbols, not just the first one
@@ -294,18 +294,18 @@ function generateUUID4(){
         if(window.crypto){
             //Create one-element array (counting starts from 1, not from 0). 
             var randArr = new Uint32Array(1);
-            //Each array element will be populated with random value, so you can get many numbers in a time.
+            //Each array element will be populated with random value (like 3479190651), so you can get many numbers in a time.
             window.crypto.getRandomValues(randArr);
-            //% will give us division remainder, in our caseit will be a number between 0 and 15
+            //% will give us division remainder, in our case it will be a number between 0 and 15
             randNum = randArr[0] % 16;
         } else {
             //Math.random() will give us pseudorandom number between 0 and 1
-            // |0 - bitwise operation OR will drop fraction part of the number
+            // |0 - bitwise operation OR, it will drop fraction part of the number
             randNum = Math.random()*16|0;
         }
         
         //v = c == 'x'  - if current symbol is not equal to x
-        //r : (r&0x3|0x8)  - v will be populated with hexadecimal number between 8 and 11 (i.e. 8, 9, a, b)
+        //r : (r&0x3|0x8)  - v will be populated with hexadecimal number between 8 and 11 (i.e. 8, 9, a or b)
         var r = randNum, v = c == 'x' ? r : (r&0x3|0x8);
         //Conversion of hexadecimal number to string (i.e. to one of these symbols: 1-9, a-f)
         return v.toString(16);

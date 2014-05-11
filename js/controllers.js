@@ -280,8 +280,29 @@ angular.module('exoFilters', []).filter('reverse', function() {
 //0-7 are reserved for backward compatibility, c,d are reserved for Microsoft, and e,f are reserved for future use)
 //First number of a third part determines version - in our case it should be 4
 function generateUUID4(){
+    //Square brackets means we should find any character between the brackets (not necessary exact sequence)
+    // /g modifier means we should search for all x an y symbols, not just the first one
+    //all found x symbols will be replaced with randomly picked hexadecimal digits (1-9, a-f) one by one
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+        
+        var randNum = "";
+        if(window.crypto){
+            var randArr = new Uint32Array(1);
+            window.crypto.getRandomValues(randArr);
+            randNum = randArr[0] % 16;
+            console.log("window.crypto.getRandomValues " + randNum);
+        } else {
+            randNum = Math.random()*16|0;
+            console.log("Math.random " + randNum);
+        }
+        
+        
+        //Math.random() will give us pseudorandom number between 0 and 1
+        // |0 - bitwise operation OR will drop fraction part of the number
+        //v = c == 'x'  - if current symbol is not equal to x
+        //r : (r&0x3|0x8)  - v will be populated with hexadecimal number between 8 and 11 (i.e. 8, 9, a, b)
+        var r = randNum, v = c == 'x' ? r : (r&0x3|0x8);
+        //Conversion of hexadecimal number to string (i.e. to one of these symbols: 1-9, a-f)
         return v.toString(16);
     });
     

@@ -89,7 +89,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     $scope.editEntry = function(timeStamp){
         var curTimestamp = new Date().getTime();
         timeStamp = curTimestamp;
-        alert(langcode);
+        alert($scope.activity.langcode);
     }
     
     

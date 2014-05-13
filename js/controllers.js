@@ -61,7 +61,8 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
 			"title": $scope.activity.title,
             "language": "English",
             "langcode": "en",
-			"timeStamp": curTimestamp
+			"createdTimeStamp": curTimestamp,
+            "modifiedTimeStamp": curTimestamp
 		};
         $scope.activities.push(newEntry);
         
@@ -88,8 +89,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     //We should pass entry object (or some of it's properties) while calling function from <form> tag
     $scope.editEntry = function(activity){
         var curTimestamp = new Date().getTime();
-        activity.timeStamp = curTimestamp;
-        //alert(activity.langcode);
+        activity.modifiedTimeStamp = curTimestamp;
         
         indexedDBexo.addEntry(activity).then(function(){
             console.log('Activity edited!');
@@ -192,16 +192,16 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");
 		var store = transact.objectStore(dbTableName);
         
-		var data = {
-            "uuid": exEntry.uuid,
-			"title": exEntry.title,
-            "language": exEntry.language,
-            "langcode": exEntry.langcode,
-			"timeStamp": exEntry.timeStamp
-		};
+		//var data = {
+        //    "uuid": exEntry.uuid,
+		// 	"title": exEntry.title,
+        //  "language": exEntry.language,
+        //    "langcode": exEntry.langcode,
+		//	"createdTimeStamp": exEntry.createdTimeStamp
+		//};
 		
 		//Request to store data at DB
-		var request = store.put(data);
+		var request = store.put(exEntry);
 		
 		request.onsuccess = function(e) {
 			console.log('Data added to DB');

@@ -68,9 +68,9 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         
         //Test
-        for(var i = 0; i < $scope.activities.length; i++){
+        for (var i = 0; i < $scope.activities.length; i++){
             var result = $scope.activities[i];
-            if(result.uuid === UUID4){
+            if (result.uuid === UUID4){
                 //return result;
                 console.log(result.langcode);
             }
@@ -86,6 +86,8 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     
     $scope.editEntry = function(timeStamp){
+        var curTimestamp = new Date().getTime();
+        timeStamp = curTimestamp;
         alert(timeStamp);
     }
     
@@ -274,7 +276,7 @@ angular.module('exoFilters', []).filter('reverse', function() {
 
 
 
-//Generate UUID version 4 (based on random or pseudo-random number), something like 20fbd631-75ce-4d27-a920-35ad76608dd7
+//Generate UUID version 4 (based on random or pseudo-random numbers), something like 20fbd631-75ce-4d27-a920-35ad76608dd7
 //Version 4 UUIDs have the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, a, or b.
 //First number of a forth part determines the variant (currently only 1 in use); If it is one of 8,9,a,b, it is correct
 //0-7 are reserved for backward compatibility, c,d are reserved for Microsoft, and e,f are reserved for future use)
@@ -282,7 +284,7 @@ angular.module('exoFilters', []).filter('reverse', function() {
 function generateUUID4(){
     //Square brackets means we should find any character between the brackets (not necessary exact sequence)
     // /g modifier means we should search for all x an y symbols, not just the first one
-    //all found x symbols will be replaced with randomly picked hexadecimal digits (1-9, a-f) one by one
+    //All found x symbols will be replaced with randomly picked hexadecimal digits (1-9, a-f) one by one
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         
         //Math.random will give us not that random results, so UUID collisions are possible
@@ -291,7 +293,7 @@ function generateUUID4(){
         //randNum variable should contain number between 0 and 15
         var randNum = "";
         //if window.crypto.getRandomValues() is available
-        if(window.crypto){
+        if (window.crypto){
             //Create one-element array (counting starts from 1, not from 0). 
             var randArr = new Uint32Array(1);
             //Each array element will be populated with random value (like 3479190651), so you can get many numbers in a time.
@@ -301,10 +303,10 @@ function generateUUID4(){
         } else {
             //Math.random() will give us pseudorandom number between 0 and 1
             // |0 - bitwise operation OR, it will drop fraction part of the number
-            randNum = Math.random()*16|0;
+            randNum = Math.random() * 16|0;
         }
         
-        //v = c == 'x'  - if current symbol is not equal to x
+        //v = c == 'x'  - if current replaceable symbol is not equal to x
         //r : (r&0x3|0x8)  - v will be populated with hexadecimal number between 8 and 11 (i.e. 8, 9, a or b)
         var r = randNum, v = c == 'x' ? r : (r&0x3|0x8);
         //Conversion of hexadecimal number to string (i.e. to one of these symbols: 1-9, a-f)

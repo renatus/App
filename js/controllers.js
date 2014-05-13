@@ -86,10 +86,10 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     
     //We should pass necessary properties as arguments (for example, timeStamp) while calling function from <form> tag
-    $scope.editEntry = function(timeStamp){
+    $scope.editEntry = function(activity){
         var curTimestamp = new Date().getTime();
-        timeStamp = curTimestamp;
-        alert($scope.activity.langcode);
+        activity.timeStamp = curTimestamp;
+        alert(activity.langcode);
     }
     
     

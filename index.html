@@ -29,7 +29,6 @@
     <ul>
 		<li ng-repeat="activity in activities | filter:userQuery | filter:language | filter:filterFn |  orderBy:orderChoice">			
 			<span ng-hide="editing" ng-click="editing = true">{{activity.title}} | {{activity.language}}</span>
-            <!--<form ng-show="editing" ng-submit="editing = false; editEntry(activity.title, activity.language, activity.langcode, activity.timeStamp)">-->
             <form ng-show="editing" ng-submit="editing = false; editEntry(activity)">
 				<label>Title:</label>
 				<input type="text" ng-model="activity.title" placeholder="Title" ng-required/>

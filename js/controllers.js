@@ -85,11 +85,15 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     
     
-    //We should pass necessary properties as arguments (for example, timeStamp) while calling function from <form> tag
+    //We should pass entry object (or some of it's properties) while calling function from <form> tag
     $scope.editEntry = function(activity){
         var curTimestamp = new Date().getTime();
         activity.timeStamp = curTimestamp;
-        alert(activity.langcode);
+        //alert(activity.langcode);
+        
+        indexedDBexo.addEntry(activity).then(function(){
+            console.log('Activity edited!');
+        });
     }
     
     
@@ -104,7 +108,7 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 	//IndexedDB database name
 	var dbName = "ExocortexDB";
 	//Database version (should be increased, when structure updates). Should be of integer type.
-	var dbVersion = 5;
+	var dbVersion = 6;
 	var exoDB = {};
 	var indexedDB = window.indexedDB;
 	
@@ -153,9 +157,9 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 			//We do not define objects structure here other than "fields" for keyPath, and for indexes
 			//While adding objects, you can omit fields, including indexing ones, but keyPath field should be filled
 			//We can make one of it's "fields" (with unique values) an in-line key with keyPath
-			var store = db.createObjectStore("activities", {keyPath: "timeStamp"});
+			var store = db.createObjectStore("activities", {keyPath: "uuid"});
 			// Create an index to search customers by text field. We may have duplicates so we can't use a unique index.
-			store.createIndex("activities", "activities", {unique: false});
+			store.createIndex("activities", "activities", {unique: true});
 			
 			//Or we can make unique integer out-of-line keys (1,2,3 ...) with keyGenerator, enabled by {autoIncrement: true}
 			//var store = db.createObjectStore("store2", {autoIncrement: true});
@@ -179,6 +183,43 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 	
 	//Add Activity entry to DB
 	this.addEntry = function(exEntry){
+		var deferred = $q.defer();
+		
+		//Database table name
+		var dbTableName = "activities";
+		var db = exoDB.indexedDB.db;
+		//Create transaction, define Object stores it will cover
+		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");
+		var store = transact.objectStore(dbTableName);
+        
+		var data = {
+            "uuid": exEntry.uuid,
+			"title": exEntry.title,
+            "language": exEntry.language,
+            "langcode": exEntry.langcode,
+			"timeStamp": exEntry.timeStamp
+		};
+		
+		//Request to store data at DB
+		var request = store.put(data);
+		
+		request.onsuccess = function(e) {
+			console.log('Data added to DB');
+			deferred.resolve();
+		};
+		
+		request.onerror = function(e) {
+			console.error("Error Adding an item: ", e);
+			deferred.reject();
+		};
+		
+		return deferred.promise;
+	};
+    
+    
+    
+    //Add Activity entry to DB
+	this.editEntry = function(exEntry){
 		var deferred = $q.defer();
 		
 		//Database table name

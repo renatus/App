@@ -30,7 +30,7 @@
         <!-- Single activity line -->
 		<li ng-repeat="activity in activities | filter:userQuery | filter:language | filter:filterFn |  orderBy:orderChoice">			
 			<span ng-hide="editing" ng-click="editing = true">{{activity.title}} | {{activity.language}}</span>
-            <button ng-click="deleteEntry(activity)">Del</button>
+            <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>
             
             <form ng-show="editing" ng-submit="editing = false; editEntry(activity)">
 				<label>Title:</label>

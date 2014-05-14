@@ -97,6 +97,14 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     }
     
     
+    
+    $scope.deleteEntry = function(activity){        
+        indexedDBexo.deleteEntry(activity).then(function(){
+            console.log('Activity deleted!');
+        });
+    }
+    
+    
 
 });
 
@@ -108,7 +116,7 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 	//IndexedDB database name
 	var dbName = "ExocortexDB";
 	//Database version (should be increased, when structure updates). Should be of integer type.
-	var dbVersion = 7;
+	var dbVersion = 8;
 	var exoDB = {};
 	var indexedDB = window.indexedDB;
 	
@@ -192,11 +200,14 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");
 		var store = transact.objectStore(dbTableName);
         
+        //We should put an object to IndexedDB
+        //AngularJS works with objects, so we can just put them to DB without alteration
+        
 		//var data = {
-        //    "uuid": exEntry.uuid,
+        //  "uuid": exEntry.uuid,
 		// 	"title": exEntry.title,
         //  "language": exEntry.language,
-        //    "langcode": exEntry.langcode,
+        //  "langcode": exEntry.langcode,
 		//	"createdTimeStamp": exEntry.createdTimeStamp
 		//};
 		
@@ -215,6 +226,34 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 		
 		return deferred.promise;
 	};
+    
+    
+    
+    //Delete Activity entry in DB
+	this.deleteEntry = function(exEntry){
+		var deferred = $q.defer();
+		
+		//Database table name
+		var dbTableName = "activities";
+		var db = exoDB.indexedDB.db;
+		//Create transaction, define Object stores it will cover
+		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");
+		var store = transact.objectStore(dbTableName);
+        
+        var request = store.delete(exEntry.uuid);
+
+		request.onsuccess = function(e) {
+			console.log('Entry deleted from DB');
+			deferred.resolve();
+		};
+		
+		request.onerror = function(e) {
+			console.error("Error deleting an entry: ", e);
+			deferred.reject();
+		};
+		
+		return deferred.promise;
+};
     
     
     

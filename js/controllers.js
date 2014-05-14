@@ -100,9 +100,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     $scope.deleteEntry = function(activity){        
         indexedDBexo.deleteEntry(activity).then(function(){
-            API.DeleteActivity({uuid: activity.uuid}, function(success){
-                $scope.activities.splice(activity, 1);
-            });
+            $scope.activities.splice($scope.activities.indexOf(activity), 1 );
             
             console.log('Activity deleted!');
         });

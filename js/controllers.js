@@ -66,8 +66,8 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
 		};
         $scope.activities.push(newEntry);
         
-        //TODO - clean form
-        //this.activity = {};
+        //Clean form from now saved user-entered data
+        this.activity = {};
         
         
         

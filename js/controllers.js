@@ -29,7 +29,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     $scope.filterFn = function(activity){
         
-        if(activity.langcode == "en"){
+        if (activity.langcode == "en"){
             return true; // this will be listed in the results
         }
         
@@ -65,6 +65,9 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
             "modifiedTimeStamp": curTimestamp
 		};
         $scope.activities.push(newEntry);
+        
+        //TODO - clean form
+        this.activity = {};
         
         
         
@@ -282,7 +285,7 @@ phonecatApp.service('indexedDBexo', function($window, $q){
             if (result === null || result === undefined) {
                 deferred.resolve(activities);
             } else {
-                if(result){
+                if (result){
                     activities.push(result.value);
                     result.continue();
                 }

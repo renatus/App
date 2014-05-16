@@ -258,7 +258,7 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 		};
 		
 		return deferred.promise;
-};
+    };
     
     
     

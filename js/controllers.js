@@ -67,7 +67,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
         $scope.activities.push(newEntry);
         
         //TODO - clean form
-        this.activity = {};
+        //this.activity = {};
         
         
         

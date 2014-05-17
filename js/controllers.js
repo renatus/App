@@ -42,7 +42,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
             "uuid": UUID4,
 			"title": {"en": $scope.activity.title},
             "language": "English",
-            "langcode": "en",
+            "langcode": $scope.activity.langcode,
 			"createdTimeStamp": curTimestamp,
             "modifiedTimeStamp": curTimestamp
 		};

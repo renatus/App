@@ -40,7 +40,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         var newEntry = {
             "uuid": UUID4,
-			"title": {$scope.activity.langcode: $scope.activity.title},
+			"title": {$scope['activity']['langcode']: $scope.activity.title},
             "language": "English",
             "langcode": $scope.activity.langcode,
 			"createdTimeStamp": curTimestamp,

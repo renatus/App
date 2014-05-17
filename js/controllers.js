@@ -40,7 +40,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         var newEntry = {
             "uuid": UUID4,
-			"title": $scope.activity.title,
+			"title": {"en": $scope.activity.title},
             "language": "English",
             "langcode": "en",
 			"createdTimeStamp": curTimestamp,
@@ -50,19 +50,6 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         //Clean form from now saved user-entered data
         this.activity = {};
-        
-        
-        
-        //Test
-        for (var i = 0; i < $scope.activities.length; i++){
-            var result = $scope.activities[i];
-            if (result.uuid === UUID4){
-                //return result;
-                console.log(result.langcode);
-            }
-        }
-        
-        
         
         indexedDBexo.addEntry(newEntry).then(function(){
             console.log('Activity added!');
@@ -103,7 +90,7 @@ phonecatApp.service('indexedDBexo', function($window, $q){
 	//IndexedDB database name
 	var dbName = "ExocortexDB";
 	//Database version (should be increased, when structure updates). Should be of integer type.
-	var dbVersion = 8;
+	var dbVersion = 9;
 	var exoDB = {};
 	var indexedDB = window.indexedDB;
 	

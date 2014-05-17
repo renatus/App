@@ -1,6 +1,6 @@
-var phonecatApp = angular.module('testApp', ['exoFilters']);
+var app = angular.module('testApp', ['exoFilters']);
 
-phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
+app.controller('StartCtrl', function ($scope, indexedDBexo) {
     
 	//$scope.activities = [
 	//	{"nid":"6650","language":"English","title":"End an agreements with Stream ISP"},
@@ -85,7 +85,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
 
 
 //Service to work with IndexedDB
-phonecatApp.service('indexedDBexo', function($window, $q){
+app.service('indexedDBexo', function($window, $q){
 	
 	//IndexedDB database name
 	var dbName = "ExocortexDB";

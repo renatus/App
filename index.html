@@ -31,7 +31,7 @@
     <ul>
         <!-- Single activity line -->
 		<li ng-repeat="activity in activities | filter:userQuery | filter:language | filter:filterFn |  orderBy:orderChoice">			
-			<span ng-hide="editing" ng-click="editing = true">{{activity.title}} | {{activity.language}}</span>
+			<span ng-hide="editing" ng-click="editing = true">{{activity.en.title}} | {{activity.language}}</span>
             <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>
             
             <form ng-show="editing" ng-submit="editing = false; editEntry(activity)">
@@ -51,7 +51,7 @@
     
     <form ng-submit="addEntry()">
         <label>Title:</label>
-        <input type="text" ng-model="activity.title" placeholder="Title" ng-required/>
+        <input type="text" ng-model="activity.en.title" placeholder="Title" ng-required/>
         <br/>
         <button class="btn" type="submit">Add</button>
     </form>

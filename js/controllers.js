@@ -40,7 +40,7 @@ phonecatApp.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         var newEntry = {
             "uuid": UUID4,
-			"title": ["en": $scope.activity.title],
+			"title": {"en": $scope.activity.title},
             "language": "English",
             "langcode": "en",
 			"createdTimeStamp": curTimestamp,

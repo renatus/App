@@ -36,7 +36,7 @@
             
             <form ng-show="editing" ng-submit="editing = false; editEntry(activity)">
 				<label>Title:</label>
-				<input type="text" ng-model="activity.en.title" placeholder="Title" ng-required/>
+				<input type="text" ng-model="activity.title" placeholder="Title" ng-required/>
 				<label>Language:</label>
 				<input type="text" ng-model="activity.language" placeholder="Language" ng-required/>
                 <label>Langcode:</label>
@@ -51,7 +51,7 @@
     
     <form ng-submit="addEntry()">
         <label>Title:</label>
-        <input type="text" ng-model="activity.en.title" placeholder="Title" ng-required/>
+        <input type="text" ng-model="activity.title" placeholder="Title" ng-required/>
         <br/>
         <button class="btn" type="submit">Add</button>
     </form>

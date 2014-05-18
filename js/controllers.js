@@ -34,13 +34,15 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     
     
-    $scope.addEntry = function(){
+    $scope.addEntry = function(activity){
         var curTimestamp = new Date().getTime();
         var UUID4 = generateUUID4();
         
+        //You can get user-entered field value without passing object to function with construction like $scope.activity.title
+        
         var newEntry = {
             "uuid": UUID4,
-			"title": {$scope['activity']['langcode']: $scope.activity.title},
+			"title": {activity.langcode: activity.title},
             "language": "English",
             "langcode": $scope.activity.langcode,
 			"createdTimeStamp": curTimestamp,

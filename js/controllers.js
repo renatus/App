@@ -9,13 +9,13 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     
     
-    $scope.filterFn = function(activity){
+    $scope.filterNot123 = function(activity){
         
-        if (activity.langcode == "en"){
-            return true; // this will be listed in the results
+        if (activity["title"][activity.langcode] == "123"){
+            return false; // this will be listed in the results
         }
         
-        return false; // otherwise it won't be within the results
+        return true; // otherwise it won't be within the results
     };
 	
 	

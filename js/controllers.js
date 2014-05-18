@@ -50,7 +50,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
 			"createdTimeStamp": curTimestamp,
             "modifiedTimeStamp": curTimestamp
 		};
-        newEntry["title"][langcode] = activity.title;
+        newEntry["title"][langcode] = activity.title;        
         
         $scope.activities.push(newEntry);
         

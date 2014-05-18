@@ -44,12 +44,14 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         var newEntry = {
             "uuid": UUID4,
-			"title": {langcode: activity.title},
+			"title": {},
             "language": "English",
             "langcode": $scope.activity.langcode,
 			"createdTimeStamp": curTimestamp,
             "modifiedTimeStamp": curTimestamp
 		};
+        newEntry["title"][langcode] = activity.title;
+        
         $scope.activities.push(newEntry);
         
         //Clean form from now saved user-entered data

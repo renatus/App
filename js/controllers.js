@@ -3,8 +3,8 @@ var app = angular.module('testApp', ['exoFilters']);
 app.controller('StartCtrl', function ($scope, indexedDBexo) {
     
 	//$scope.activities = [
-	//	{"nid":"6650","language":"English","title":"End an agreements with Stream ISP"},
-	//	{"nid":"3188","language":"English","title":"Renew domain exocortex.pp.ua"}
+	//	{"nid":"6650","langcode":"en","title":"End an agreements with Stream ISP"},
+	//	{"nid":"3188","langcode":"en","title":"Renew domain exocortex.pp.ua"}
 	//];
     
     
@@ -45,7 +45,6 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         var newEntry = {
             "uuid": UUID4,
 			"title": {},
-            "language": "English",
             "langcode": $scope.activity.langcode,
 			"createdTimeStamp": curTimestamp,
             "modifiedTimeStamp": curTimestamp
@@ -186,7 +185,6 @@ app.service('indexedDBexo', function($window, $q){
 		//var data = {
         //  "uuid": exEntry.uuid,
 		// 	"title": exEntry.title,
-        //  "language": exEntry.language,
         //  "langcode": exEntry.langcode,
 		//	"createdTimeStamp": exEntry.createdTimeStamp
 		//};

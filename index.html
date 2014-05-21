@@ -61,8 +61,8 @@
     
     <form name="addActivity" ng-submit="addEntry(activity)" novalidate >
         <label>Title:</label>
-        <input type="text" ng-model="activity.title" placeholder="Title" required />
-        <select ng-model="activity.langcode" required >
+        <input type="text" ng-model="activity.0.title" placeholder="Title" required />
+        <select ng-model="activity.0.langcode" required >
             <option value="en">English</option>
             <option value="ru">Russian</option>
         </select>

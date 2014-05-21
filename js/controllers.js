@@ -44,12 +44,14 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         var newEntry = {
             "uuid": UUID4,
-			"title": {},
-            "langcode": $scope.activity.langcode,
-			"createdTimeStamp": curTimestamp,
-            "modifiedTimeStamp": curTimestamp
+            "0": {
+                "title": {},
+                "langcode": $scope.activity.langcode,
+                "createdTimeStamp": curTimestamp,
+                "modifiedTimeStamp": curTimestamp
+            }
 		};
-        newEntry["title"][langcode] = activity.title;        
+        newEntry["0"]["title"][langcode] = activity.title;        
         
         $scope.activities.push(newEntry);
         

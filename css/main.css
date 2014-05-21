@@ -1,6 +1,7 @@
 /* Show green border when stuff has been typed in, and its valid */
 .ng-dirty.ng-valid {
-  border-color:#3a7d34;
+    border-color:#3a7d34;
+    border-width:medium;
 }
 
 /* Show red border when stuff has been typed in, but its invalid */

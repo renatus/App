@@ -35,7 +35,7 @@
     <ul>
         <!-- Single activity line -->
 		<!--<li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderBy:orderChoice">-->
-        <li ng-repeat="activity in activities">
+        <li ng-repeat="activity in activities track by uuid">
 			<span ng-hide="editing" ng-click="editing = true">{{activity['title'][activity.langcode]}} | {{activity.langcode}}</span>
             <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>
             

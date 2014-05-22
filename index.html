@@ -40,7 +40,7 @@
         
 		<!--<li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderBy:orderChoice">-->
         <li ng-repeat="activity in activities | filter:userQuery | filter:langcode | orderBy:orderChoice">
-			<span ng-hide="editing" ng-click="editing = true">{{activity[0]['title'][activity.0.langcode]}} | {{activity.0.langcode}}</span>
+			<span ng-hide="editing" ng-click="editing = true">{{activity['0']['title'][activity.0.langcode]}} | {{activity.0.langcode}}</span>
             <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>
             
             <form name="editActivity" ng-show="editing" ng-submit="editing = false; editEntry(activity)" novalidate >

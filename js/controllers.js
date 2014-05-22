@@ -18,7 +18,10 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         return true; // otherwise it won't be within the results
     };
     
-    $scope.filter('orderObjectBy', function() {
+    
+    
+    $scope.orderObjectBy = function(){
+    //$scope.filter('orderObjectBy', function() {
         return function(items, field, reverse) {
             var filtered = [];
             angular.forEach(items, function(item) {

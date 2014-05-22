@@ -39,7 +39,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         var curTimestamp = new Date().getTime();
         var UUID4 = generateUUID4();
         
-        var langcode = activity.0.langcode;
+        var langcode = activity.langcode;
         
         
         var newEntry = {

@@ -41,7 +41,7 @@
         <!-- $$hashKey contains dupes, possible to see at DevTools console objects array -->
         
 		<!--<li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderBy:orderChoice">-->
-        <li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderObjectBy:'uuid':true">
+        <li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | filter:orderObjectBy:'uuid':true">
 			<span ng-hide="editing" ng-click="editing = true">{{activity['0']['title'][activity.0.langcode]}} | {{activity.0.langcode}}</span>
             <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>
             

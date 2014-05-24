@@ -1,5 +1,8 @@
 var app = angular.module('testApp', ['exoFilters']);
 
+
+//orderBy only works with arrays, not with objects
+// http://stackoverflow.com/questions/14478106/angularjs-sorting-by-property
     app.filter('orderObjectBy', function(){
         return function(input, attribute) {
             if (!angular.isObject(input)) return input;

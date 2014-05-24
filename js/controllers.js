@@ -12,8 +12,8 @@ var app = angular.module('testApp', ['exoFilters']);
             array.sort(function(a, b){
                 console.log(b[0][attribute]);
                 
-                a = parseInt(a[attribute]);
-                b = parseInt(b[attribute]);
+                a = parseInt(a[0][attribute]);
+                b = parseInt(b[0][attribute]);
                 return a - b;
             });
             return array;

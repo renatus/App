@@ -47,7 +47,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     //        if(reverse) filtered.reverse();
     //        return filtered;
     //    };
-    };
+    //};
 
 	
 	

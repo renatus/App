@@ -35,8 +35,8 @@ app.filter('orderObjectBy2', function(){
             //var alc = a[0][attribute]['en'].toLowerCase();
             //var blc = b[0][attribute]['en'].toLowerCase();
             
-            var alc = a[0][attribute]['en'].toString().toLowerCase();
-            var blc = b[0][attribute]['en'].toString().toLowerCase();
+            var alc = a[0][attribute].toString().toLowerCase();
+            var blc = b[0][attribute].toString().toLowerCase();
             
             return alc > blc ? 1 : alc < blc ? -1 : 0;
         });

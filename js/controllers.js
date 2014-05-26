@@ -13,9 +13,7 @@ app.filter('orderObjectBy', function(){
             array.push(input[objectKey]);
         }
         
-        array.sort(function(a, b){
-            console.log(b[0][attribute]);
-            
+        array.sort(function(a, b){            
             a = parseInt(a[0][attribute]);
             b = parseInt(b[0][attribute]);
             return a - b;

@@ -22,6 +22,24 @@ app.filter('orderObjectBy', function(){
     }
 });
 
+app.filter('orderObjectBy2', function(){
+    return function(input, attribute) {
+        if (!angular.isObject(input)) return input;
+            
+        var array = [];
+        for (var objectKey in input) {
+            array.push(input[objectKey]);
+        }
+        
+        array.sort(function(a, b){            
+            a = parseInt(a[0][attribute]['en']);
+            b = parseInt(b[0][attribute]['en']);
+            return a - b;
+        });
+        return array;
+    }
+});
+
 
 
 app.controller('StartCtrl', function ($scope, indexedDBexo) {

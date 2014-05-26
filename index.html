@@ -35,12 +35,8 @@
     
     <ul>
         <!-- Single activity line -->
-        <!--"Error: [ngRepeat:dupes] Duplicates in a repeater are not allowed" can be solved by adding "track by SomeUniqueKey"-->
-        <!--<li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderBy:orderChoice track by activity.uuid">-->
-        <!-- $$hashKey contains dupes, possible to see at DevTools console objects array -->
-        <!-- track by $index -->
-        
-		<!--<li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderBy:orderChoice">-->
+        <!-- Use "track by object.someUniqueKey" with ng-repeat to improve performance and prevent [ngRepeat:dupes] errors -->
+		<!-- orderBy standard filter works only with arrays, not with objects and sub-objects -->
         <li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderObjectBy:'modifiedTimeStamp' track by activity.uuid">
 			<span ng-hide="editing" ng-click="editing = true">{{activity['0']['title'][activity.0.langcode]}} | {{activity.0.langcode}}</span>
             <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>

@@ -26,7 +26,7 @@ app.filter('orderObjectByINT', function(){
 });
 
 app.filter('orderObjectByTXT', function(){
-    return function(input, attribute) {
+    return function(input, attribute, reverse) {
         if (!angular.isObject(input)) return input;
             
         var array = [];
@@ -41,6 +41,9 @@ app.filter('orderObjectByTXT', function(){
             
             return alc > blc ? 1 : alc < blc ? -1 : 0;
         });
+        
+        if(reverse) array.reverse();
+        
         return array;
     }
 });

@@ -1,27 +1,30 @@
 var app = angular.module('testApp', ['exoFilters']);
 
 
+
 //orderBy only works with arrays, not with objects
 // http://stackoverflow.com/questions/14478106/angularjs-sorting-by-property
-    app.filter('orderObjectBy', function(){
-        return function(input, attribute) {
-            if (!angular.isObject(input)) return input;
+app.filter('orderObjectBy', function(){
+    return function(input, attribute) {
+        if (!angular.isObject(input)) return input;
             
-            var array = [];
-            for(var objectKey in input) {
-                array.push(input[objectKey]);
-            }
-            
-            array.sort(function(a, b){
-                console.log(b[0][attribute]);
-                
-                a = parseInt(a[0][attribute]);
-                b = parseInt(b[0][attribute]);
-                return a - b;
-            });
-            return array;
+        var array = [];
+        for(var objectKey in input) {
+            array.push(input[objectKey]);
         }
-    });
+        
+        array.sort(function(a, b){
+            console.log(b[0][attribute]);
+            
+            a = parseInt(a[0][attribute]);
+            b = parseInt(b[0][attribute]);
+            return a - b;
+        });
+        return array;
+    }
+});
+
+
 
 app.controller('StartCtrl', function ($scope, indexedDBexo) {
     
@@ -40,40 +43,6 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         return true; // otherwise it won't be within the results
     };
-    
-    
-    
-    //$scope.orderObjectBy = function(items, field, reverse) {
-    //        var filtered = [];
-    //        angular.forEach(items, function(item) {
-    //            filtered.push(item);
-    //        });
-            
-    //        filtered.sort(function (a, b) {
-    //            return (a[field] > b[field] ? 1 : -1);
-    //        });
-    //        if(reverse) filtered.reverse();
-    //        return filtered;
-    //};
-    
-
-    
-    //$scope.orderObjectBy2 = function(){
-    //$scope.filter('orderObjectBy', function() {
-    //    return function(items, field, reverse) {
-    //        var filtered = [];
-    //        angular.forEach(items, function(item) {
-    //            filtered.push(item);
-    //        });
-            
-    //        filtered.sort(function (a, b) {
-    //            return (a[field] > b[field] ? 1 : -1);
-    //        });
-    //        if(reverse) filtered.reverse();
-    //        return filtered;
-    //    };
-    //};
-
 	
 	
 	

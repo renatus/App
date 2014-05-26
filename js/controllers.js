@@ -4,7 +4,7 @@ var app = angular.module('testApp', ['exoFilters']);
 
 //orderBy only works with arrays, not with objects
 // http://stackoverflow.com/questions/14478106/angularjs-sorting-by-property
-app.filter('orderObjectBy', function(){
+app.filter('orderObjectByINT', function(){
     return function(input, attribute) {
         if (!angular.isObject(input)) return input;
             
@@ -22,7 +22,7 @@ app.filter('orderObjectBy', function(){
     }
 });
 
-app.filter('orderObjectBy2', function(){
+app.filter('orderObjectByTXT', function(){
     return function(input, attribute) {
         if (!angular.isObject(input)) return input;
             
@@ -32,9 +32,7 @@ app.filter('orderObjectBy2', function(){
         }
         
         array.sort(function(a, b){            
-            //var alc = a[0][attribute]['en'].toLowerCase();
-            //var blc = b[0][attribute]['en'].toLowerCase();
-            
+            //.toString() will convert numbers to text, and they'll be sorted in order like: 1, 12, 1218, 2, 24, 3, 4, 5, 6...
             var alc = a[0][attribute]['en'].toString().toLowerCase();
             var blc = b[0][attribute]['en'].toString().toLowerCase();
             

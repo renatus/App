@@ -32,12 +32,12 @@ app.filter('orderObjectBy2', function(){
         }
         
         array.sort(function(a, b){            
-            //a = parseInt(a[0][attribute]['en']);
-            //b = parseInt(b[0][attribute]['en']);
-            //return a - b;
+            //var alc = a[0][attribute]['en'].toLowerCase(),
+            //blc = b[0][attribute]['en'].toLowerCase();
             
-            var alc = a[0][attribute]['en'].toLowerCase(),
-            blc = b[0][attribute]['en'].toLowerCase();
+            var alc = a[0][attribute].toLowerCase(),
+            blc = b[0][attribute].toLowerCase();
+            
             return alc > blc ? 1 : alc < blc ? -1 : 0;
         });
         return array;

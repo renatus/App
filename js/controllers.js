@@ -5,7 +5,7 @@ var app = angular.module('testApp', ['exoFilters']);
 //orderBy only works with arrays, not with objects
 // http://stackoverflow.com/questions/14478106/angularjs-sorting-by-property
 app.filter('orderObjectByINT', function(){
-    return function(input, attribute) {
+    return function(input, attribute, reverse) {
         if (!angular.isObject(input)) return input;
             
         var array = [];
@@ -18,6 +18,9 @@ app.filter('orderObjectByINT', function(){
             b = parseInt(b[0][attribute]);
             return a - b;
         });
+        
+        if(reverse) array.reverse();
+        
         return array;
     }
 });

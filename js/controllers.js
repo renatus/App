@@ -42,7 +42,7 @@ app.filter('orderObjectByTXT', function(){
             return alc > blc ? 1 : alc < blc ? -1 : 0;
         });
         
-        if(reverse) array.reverse();
+        if(reverse == 'desc') array.reverse();
         
         return array;
     }

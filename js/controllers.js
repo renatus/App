@@ -14,8 +14,8 @@ app.filter('orderObjectByINT', function(){
         }
         
         array.sort(function(a, b){            
-            a = parseInt(a[0][attribute]);
-            b = parseInt(b[0][attribute]);
+            a = parseInt(a[0][attribute]['en']);
+            b = parseInt(b[0][attribute]['en']);
             return a - b;
         });
         

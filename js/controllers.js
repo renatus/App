@@ -19,7 +19,7 @@ app.filter('orderObjectByINT', function(){
             return a - b;
         });
         
-        if(reverse) array.reverse();
+        if(reverse == 'descend') array.reverse();
         
         return array;
     }
@@ -42,7 +42,7 @@ app.filter('orderObjectByTXT', function(){
             return alc > blc ? 1 : alc < blc ? -1 : 0;
         });
         
-        if(reverse == 'desc') array.reverse();
+        if(reverse == 'descend') array.reverse();
         
         return array;
     }

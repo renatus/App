@@ -121,7 +121,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         var curTimestamp = new Date().getTime();
         var curVersion = activity["lastVersion"] + 1;
         activity["lastVersion"] = curVersion;
-        //activity[curVersion]["modifiedTimeStamp"] = curTimestamp;
+        activity["1"]["modifiedTimeStamp"] = curTimestamp;
         
         indexedDBexo.addEntry(activity).then(function(){
             console.log('Activity edited!');

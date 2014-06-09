@@ -119,7 +119,9 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     //We should pass entry object (or some of it's properties) while calling function from <form> tag
     $scope.editEntry = function(activity){
         var curTimestamp = new Date().getTime();
-        activity["0"]["modifiedTimeStamp"] = curTimestamp;
+        var curVersion = activity["lastVersion"] + 1;
+        activity["lastVersion"] = curVersion;
+        activity[curVersion]["modifiedTimeStamp"] = curTimestamp;
         
         indexedDBexo.addEntry(activity).then(function(){
             console.log('Activity edited!');

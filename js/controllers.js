@@ -358,7 +358,7 @@ angular.module('exoFilters', []).filter('reverse', function() {
 
 
 app.directive("clickToEdit", function() {
-    var editorTemplate = '<div>' + '{{value}} ' + '</div>';
+    var editorTemplate = '<div>' + '<input type="text" value="' + '{{value}}' + '" required />' + '</div>';
 
     return {
         restrict: "A",

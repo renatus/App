@@ -368,6 +368,8 @@ app.directive("clickToEdit", function() {
             value: "=clickToEdit",
         },
         controller: function($scope) {
+            console.log($scope.value);
+            
             $scope.view = {
                 editableValue: $scope.value,
                 editorEnabled: false

@@ -66,7 +66,7 @@
             
             <form name="editActivity" ng-show="editing" ng-submit="editing = false; editEntry(activity)" novalidate >
 				<label>Title:</label>
-				<input type="text" value="activity['0']['title'][activity.0.langcode]" placeholder="Title" required />
+				<input type="text" ng-model="activity['0']['title'][activity.0.langcode]" placeholder="Title" required />
                 <label>Langcode:</label>
 				<select ng-model="activity.0.langcode" required >
                     <option value="en">English</option>

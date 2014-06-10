@@ -357,6 +357,27 @@ angular.module('exoFilters', []).filter('reverse', function() {
 
 
 
+app.directive("clickToEdit", function() {
+    var editorTemplate = '<div>' + '{{value}} ' + '</div>';
+
+    return {
+        restrict: "A",
+        replace: true,
+        template: editorTemplate,
+        scope: {
+            value: "=clickToEdit",
+        },
+        controller: function($scope) {
+            $scope.view = {
+                editableValue: $scope.value,
+                editorEnabled: false
+            };
+        }
+    };
+});
+
+
+
 //Generate UUID version 4 (based on random or pseudo-random numbers), something like 20fbd631-75ce-4d27-a920-35ad76608dd7
 //Version 4 UUIDs have the form xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx where x is any hexadecimal digit and y is one of 8, 9, a, or b.
 //First number of a forth part determines the variant (currently only 1 in use); If it is one of 8,9,a,b, it is correct

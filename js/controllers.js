@@ -380,7 +380,7 @@ app.directive("clickToEdit", function() {
 
 
 app.directive("editActivity", function() {
-    var editorTemplate = '';
+    //var editorTemplate = '';
 
     return {
         restrict: "A",
@@ -391,6 +391,7 @@ app.directive("editActivity", function() {
             value: "=clickToEdit",
         },
         controller: function($scope) {
+            console.log($scope.value);
             
             $scope.view = {
                 editableValue: $scope.value,

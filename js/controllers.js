@@ -368,7 +368,29 @@ app.directive("clickToEdit", function() {
             value: "=clickToEdit",
         },
         controller: function($scope) {
-            console.log($scope.value);
+            
+            $scope.view = {
+                editableValue: $scope.value,
+                editorEnabled: false
+            };
+        }
+    };
+});
+
+
+
+app.directive("editActivity", function() {
+    var editorTemplate = '';
+
+    return {
+        restrict: "A",
+        replace: true,
+        //template: editorTemplate,
+        templateUrl: "templates/edit-activity.html",
+        scope: {
+            value: "=clickToEdit",
+        },
+        controller: function($scope) {
             
             $scope.view = {
                 editableValue: $scope.value,

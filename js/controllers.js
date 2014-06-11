@@ -387,9 +387,9 @@ app.directive("editActivity", function() {
         replace: true,
         //template: editorTemplate,
         templateUrl: "templates/edit-activity.html",
-        scope: {
-            value: "=clickToEdit",
-        },
+        //scope: {
+        //    value: "=clickToEdit",
+        //},
         controller: function($scope) {
             console.log($scope.value);
             

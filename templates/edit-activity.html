@@ -1,8 +1,8 @@
 <form name="editorActivity" ng-show="editing" ng-submit="editing = false; editEntry(activity)" novalidate >
     <label>Title:</label>
-    <input type="text" ng-model="editActivity['0']['title'][editActivity.0.langcode]" placeholder="Title" required />
+    <input type="text" ng-model="view['editActivity']['0']['title'][view.editActivity.0.langcode]" placeholder="Title" required />
     <label>Langcode:</label>
-    <select ng-model="editActivity.0.langcode" required >
+    <select ng-model="view.editActivity.0.langcode" required >
         <option value="en">English</option>
         <option value="ru">Russian</option>
     </select>

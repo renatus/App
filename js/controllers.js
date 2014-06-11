@@ -399,7 +399,7 @@ app.directive("editActivity", function() {
                 editActivity: $scope.activity,
             //    editorEnabled: false
             };
-            $scope.view.editActivity = $scope.activity;
+            $scope.editActivity = $scope.activity;
         }
     };
 });

@@ -391,7 +391,7 @@ app.directive("editActivity", function() {
         //    value: "=clickToEdit",
         //},
         controller: function($scope) {
-            console.log($scope.value);
+            console.log($scope);
             
             $scope.view = {
                 editableValue: $scope.value,

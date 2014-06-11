@@ -393,13 +393,13 @@ app.directive("editActivity", function() {
         controller: function($scope) {
             //console.log($scope.activity);
             
-            //$scope.view.editActivity = $scope.activity;
+            //$scope.view.editbActivity = $scope.activity;
             
             $scope.view = {
-                editActivity: $scope.activity,
+                editbActivity: $scope.activity,
             //    editorEnabled: false
             };
-            $scope.editActivity = $scope.activity;
+            $scope.editbActivity = $scope.activity;
         }
     };
 });

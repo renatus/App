@@ -393,6 +393,7 @@ app.directive("editActivity", function() {
         controller: function($scope) {
             //console.log($scope.activity);
             
+            //Object will be passed by reference
             //$scope.view.editbActivity = $scope.activity;
             
             $scope.view = {
@@ -400,6 +401,9 @@ app.directive("editActivity", function() {
             //    editorEnabled: false
             };
             $scope.editbActivity = JSON.parse(JSON.stringify($scope.activity));
+            
+            //Will delete only reference, not object itself, but that may help to garbage collector 
+            //delete $scope.editbActivity;
         }
     };
 });

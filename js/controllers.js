@@ -152,9 +152,10 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         activity[curVersion] = activity[activity["lastVersion"]];
         activity[curVersion]["modifiedTimeStamp"] = curTimestamp;
         
-        activity[curVersion]["langcode"] = "en";
-        activity[curVersion]["title"]["en"] = activity[curVersion]["title"]["ru"];
-        delete activity[curVersion]["title"]["ru"];
+        console.log(activity[curVersion]["title"]["ru"]);
+        //activity[curVersion]["langcode"] = "en";
+        //activity[curVersion]["title"]["en"] = activity[curVersion]["title"]["ru"];
+        //delete activity[curVersion]["title"]["ru"];
         
         activity["lastVersion"] = curVersion;
         

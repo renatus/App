@@ -143,6 +143,27 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     }
     
     
+    
+    $scope.changeEntryLang = function(activity){
+        var curTimestamp = new Date().getTime();
+        var curVersion = activity["lastVersion"] + 1;
+        
+        activity[curVersion] = {};
+        activity[curVersion] = activity[activity["lastVersion"]];
+        activity[curVersion]["modifiedTimeStamp"] = curTimestamp;
+        
+        activity[curVersion]["langcode"] = "en";
+        activity[curVersion]["title"]["en"] = activity[curVersion]["title"]["ru"];
+        delete activity[curVersion]["title"]["ru"];
+        
+        activity["lastVersion"] = curVersion;
+        
+        indexedDBexo.addEntry(activity).then(function(){
+            console.log('Language changed!');
+        });
+    }
+    
+    
 
 });
 

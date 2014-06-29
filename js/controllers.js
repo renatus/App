@@ -144,6 +144,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     
     
+    //Change object, do not trigger DB entry update.
     $scope.changeEntryLang = function(activity){
         var curTimestamp = new Date().getTime();
         var curVersion = activity["lastVersion"] + 1;

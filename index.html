@@ -13,14 +13,14 @@
     <link rel="import" href="components/bower_components/core-selector/core-selector.html">
 </head>
 	
-<body ng-controller="StartCtrl">
-    
     <core-selector selected="0">
         <div>Item 1</div>
         <div>Item 2</div>
         <div>Item 3</div>
     </core-selector>
-
+    
+<body ng-controller="StartCtrl">
+    
     <input type="text" ng-model="::testOneTimeBind">
     {{::testOneTimeBind}}
     </br>

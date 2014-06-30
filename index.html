@@ -9,9 +9,13 @@
     <script type="text/javascript" src="libs/IndexedDBShim.min.js"></script>
     <script type="text/javascript" src="libs/angular.js"></script>
 	<script src="js/controllers.js"></script>
+    
+    <link rel="import" href="components/core-toolbar/core-toolbar.html">
 </head>
 	
 <body ng-controller="StartCtrl">
+    
+    </core-toolbar><div>Toolbar</div></core-toolbar>
 
     <input type="text" ng-model="::testOneTimeBind">
     {{::testOneTimeBind}}

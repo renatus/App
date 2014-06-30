@@ -10,12 +10,16 @@
     <script type="text/javascript" src="libs/angular.js"></script>
 	<script src="js/controllers.js"></script>
     
-    <link rel="import" href="components/paper-checkbox/paper-checkbox.html">
+    <link rel="import" href="components/bower_components/core-selector/core-selector.html">
 </head>
 	
 <body ng-controller="StartCtrl">
     
-    <paper-checkbox></paper-checkbox>
+    <core-selector selected="0">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+    </core-selector>
 
     <input type="text" ng-model="::testOneTimeBind">
     {{::testOneTimeBind}}

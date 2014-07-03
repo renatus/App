@@ -161,9 +161,9 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         activity["lastVersion"] = curVersion;
         
-        indexedDBexo.addEntry(activity).then(function(){
-            console.log('Language changed!');
-        });
+        //indexedDBexo.addEntry(activity).then(function(){
+        //    console.log('Language changed!');
+        //});
     }
     
     

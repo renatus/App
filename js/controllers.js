@@ -418,7 +418,7 @@ app.directive("editActivity", function() {
             //$scope.view.editbActivity = $scope.activity;
             
             $scope.view = {
-                editbActivity: $scope.activity,
+                //editbActivity: $scope.activity,
             //    editorEnabled: false
             };
             $scope.editbActivity = angular.copy($scope.activity);

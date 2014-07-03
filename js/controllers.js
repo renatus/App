@@ -147,19 +147,16 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     //Change object, do not trigger DB entry update.
     $scope.changeEntryLang = function(activity){
         var curTimestamp = new Date().getTime();
-        var curVersion = activity["lastVersion"] + 1;
-        
-        activity[curVersion] = {};
-        activity[curVersion] = activity[activity["lastVersion"]];
+        //
+        var curVersion = activity["lastVersion"];
+
         activity[curVersion]["modifiedTimeStamp"] = curTimestamp;
-        
-        console.log(activity[curVersion]["title"]["ru"]);
         activity[curVersion]["langcode"] = "en";
         //By reference
         activity[curVersion]["title"]["en"] = activity[curVersion]["title"]["ru"];
         //delete activity[curVersion]["title"]["ru"];
         
-        activity["lastVersion"] = curVersion;
+        //activity["lastVersion"] = curVersion;
         
         //indexedDBexo.addEntry(activity).then(function(){
         //    console.log('Language changed!');

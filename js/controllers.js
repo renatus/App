@@ -417,10 +417,10 @@ app.directive("editActivity", function() {
             //Object will be passed by reference
             //$scope.view.editbActivity = $scope.activity;
             
-            $scope.view = {
+            //$scope.view = {
                 //editbActivity: $scope.activity,
             //    editorEnabled: false
-            };
+            //};
             $scope.editbActivity = angular.copy($scope.activity);
             //$scope.editbActivity = JSON.parse(JSON.stringify($scope.activity));
             

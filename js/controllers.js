@@ -116,6 +116,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     
     
+    //curVersion to newVersion?
     //We should pass entry object (or some of it's properties) while calling function from <form> tag
     $scope.editEntry = function(activity, langcode){
         var curTimestamp = new Date().getTime();
@@ -126,10 +127,10 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         activity[curVersion]["modifiedTimeStamp"] = curTimestamp;
         
         
-        console.log(langcode);
-        //if (){
-            
-        //}
+        //console.log(langcode);
+        if (activity[activity["lastVersion"]]['langcode'] == langcode){
+            console.log("Langcode was not changed");
+        }
         
         
         activity["lastVersion"] = curVersion;

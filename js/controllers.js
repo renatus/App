@@ -423,7 +423,7 @@ app.directive("editActivity", function() {
             //};
             
             $scope.editbActivity = angular.copy($scope.activity);
-            $scope.editbActivityLangcode = angular.copy($scope.activity.langcode);
+            $scope.editbActivityLangcode = angular.copy($scope['activity'][$scope['activity']['lastVersion']]['langcode']);
             console.log($scope.editbActivityLangcode);
             //$scope.editbActivity = JSON.parse(JSON.stringify($scope.activity));
             

@@ -423,6 +423,7 @@ app.directive("editActivity", function() {
             //};
             
             $scope.editbActivity = angular.copy($scope.activity);
+            $scope.editbActivityLangcode = angular.copy($scope.activity.langcode);
             //$scope.editbActivity = JSON.parse(JSON.stringify($scope.activity));
             
             //Will delete only reference, not object itself, but that may help to garbage collector 

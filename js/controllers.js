@@ -116,30 +116,33 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     
     
-    //curVersion to newVersion?
-    //We should pass entry object (or some of it's properties) while calling function from <form> tag
     $scope.editEntry = function(activity, langcode){
         var curTimestamp = new Date().getTime();
+        //Get current entry revision
         var curVersion = activity["lastVersion"] + 1;
         
         activity[curVersion] = {};
+        //At first current revision will be the same as previous
         activity[curVersion] = angular.copy(activity[activity["lastVersion"]]);
+        //Timestamp of a moment entry was modified
         activity[curVersion]["modifiedTimeStamp"] = curTimestamp;
         
-        
-        //console.log(langcode);
+        //If user have changed entry's language, we should change it for all language-specific properties
+        //without creation dupes, such as en: "Title" ru: "Title"
         var oldLangcode = activity[activity["lastVersion"]]["langcode"];
         if (oldLangcode != langcode){
-            console.log("Langcode was changed");
-            
+            //Set entry's langcode
             activity[curVersion]["langcode"] = langcode;
+            //Title value is not an object, so it'll not be copied by reference, so it's safe to delete original title value in a new revision
             activity[curVersion]["title"][langcode] = activity[curVersion]["title"][oldLangcode];
             delete activity[curVersion]["title"][oldLangcode];
         }
         
+        //
         activity["lastVersion"] = curVersion;
         
         
+        //Update entry in local DB
         indexedDBexo.addEntry(activity).then(function(){
             console.log('Activity edited!');
         });
@@ -155,30 +158,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
             
             console.log('Activity deleted!');
         });
-    }
-    
-    
-    
-    //Change object, do not trigger DB entry update.
-    $scope.changeEntryLang = function(activity){
-        var curTimestamp = new Date().getTime();
-        //
-        var curVersion = activity["lastVersion"];
-
-        activity[curVersion]["modifiedTimeStamp"] = curTimestamp;
-        activity[curVersion]["langcode"] = "en";
-        //By reference
-        activity[curVersion]["title"]["en"] = activity[curVersion]["title"]["ru"];
-        //delete activity[curVersion]["title"]["ru"];
-        
-        //activity["lastVersion"] = curVersion;
-        
-        //indexedDBexo.addEntry(activity).then(function(){
-        //    console.log('Language changed!');
-        //});
-    }
-    
-    
+    }    
 
 });
 

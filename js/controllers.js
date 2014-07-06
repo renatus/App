@@ -158,6 +158,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
                 console.log(activity);
                 console.log($scope.editbActivityLastRev);
                 
+                //TODO:EDIT
                 $scope.activities[i] = angular.copy(activity);
                 console.log(prevVersion);
                 $scope.activities[i][prevVersion] = angular.copy($scope.editbActivityLastRev);
@@ -440,6 +441,8 @@ app.directive("editActivity", function() {
             $scope.editbActivity = angular.copy($scope.activity);
             $scope.editbActivityLangcode = angular.copy($scope['activity'][$scope['activity']['lastVersion']]['langcode']);
             $scope.editbActivityLastRev = angular.copy($scope['activity'][$scope['activity']['lastVersion']]);
+            
+            console.log($scope['activity'][$scope['activity']['lastVersion']]);
             //$scope.editbActivity = JSON.parse(JSON.stringify($scope.activity));
             
             //Will delete only reference, not object itself, but that may help to garbage collector 

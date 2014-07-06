@@ -128,16 +128,23 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         
         //console.log(langcode);
-        if (activity[activity["lastVersion"]]['langcode'] == langcode){
-            console.log("Langcode was not changed");
+        var oldLangcode = activity[activity["lastVersion"]]["langcode"];
+        if (oldLangcode != langcode){
+            console.log("Langcode was changed");
+            
+            activity[curVersion]["langcode"] = langcode;
+            activity[curVersion]["title"][langcode] = activity[curVersion]["title"][oldLangcode];
+            delete activity[curVersion]["title"][oldLangcode];
         }
         
-        
         activity["lastVersion"] = curVersion;
+        
         
         indexedDBexo.addEntry(activity).then(function(){
             console.log('Activity edited!');
         });
+        
+        
     }
     
     

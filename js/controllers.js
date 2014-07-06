@@ -119,7 +119,8 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     //TODO:EDIT
     $scope.editEntry = function(activity, langcode){
         var curTimestamp = new Date().getTime();
-        //Get current entry revision
+        var prevVersion = activity["lastVersion"];
+        //Generate current entry revision
         var curVersion = activity["lastVersion"] + 1;
         
         activity[curVersion] = {};
@@ -153,7 +154,6 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         for(var i = 0; i < $scope.activities.length; i++){
             if($scope.activities[i].uuid == activity.uuid){
                 $scope.activities[i] = angular.copy(activity);
-                var prevVersion = activity["lastVersion"];
                 console.log(prevVersion);
                 $scope.activities[i][prevVersion] = angular.copy($scope.editbActivityLastRev);
                 break;

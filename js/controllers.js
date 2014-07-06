@@ -61,7 +61,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     $scope.filterNot123 = function(activity){
         
-        console.log(activity);
+        //console.log(activity);
         if (activity["0"]["title"][activity["0"]["langcode"]] == "123"){
             return false; // this will be listed in the results
         }
@@ -123,7 +123,6 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         var prevVersion = activity["lastVersion"];
         //Generate current entry revision
         var curVersion = activity["lastVersion"] + 1;
-        console.log(prevVersion, curVersion);
         
         activity[curVersion] = {};
         //At first current revision will be the same as previous
@@ -155,6 +154,8 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         for (var i = 0; i < $scope.activities.length; i++){
             if ($scope.activities[i].uuid == activity.uuid){
+                console.log($scope.activities[i]);
+                
                 $scope.activities[i] = angular.copy(activity);
                 console.log(prevVersion);
                 $scope.activities[i][prevVersion] = angular.copy($scope.editbActivityLastRev);

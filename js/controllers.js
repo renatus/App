@@ -122,6 +122,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         var prevVersion = activity["lastVersion"];
         //Generate current entry revision
         var curVersion = activity["lastVersion"] + 1;
+        console.log(prevVersion, curVersion);
         
         activity[curVersion] = {};
         //At first current revision will be the same as previous
@@ -151,8 +152,8 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         
         
-        for(var i = 0; i < $scope.activities.length; i++){
-            if($scope.activities[i].uuid == activity.uuid){
+        for (var i = 0; i < $scope.activities.length; i++){
+            if ($scope.activities[i].uuid == activity.uuid){
                 $scope.activities[i] = angular.copy(activity);
                 console.log(prevVersion);
                 $scope.activities[i][prevVersion] = angular.copy($scope.editbActivityLastRev);

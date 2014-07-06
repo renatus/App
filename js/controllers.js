@@ -61,7 +61,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     $scope.filterNot123 = function(activity){
         
-        if (activity["0"]["title"][activity.langcode] == "123"){
+        if (activity["0"]["title"][activity["0"]["langcode"]] == "123"){
             return false; // this will be listed in the results
         }
         

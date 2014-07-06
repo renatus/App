@@ -123,7 +123,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         var curVersion = activity["lastVersion"] + 1;
         
         activity[curVersion] = {};
-        activity[curVersion] = activity[activity["lastVersion"]];
+        activity[curVersion] = angular.copy(activity[activity["lastVersion"]]);
         activity[curVersion]["modifiedTimeStamp"] = curTimestamp;
         
         

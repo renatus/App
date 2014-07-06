@@ -156,6 +156,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
             if ($scope.activities[i].uuid == activity.uuid){
                 console.log($scope.activities[i]);
                 console.log(activity);
+                console.log($scope.editbActivityLastRev);
                 
                 $scope.activities[i] = angular.copy(activity);
                 console.log(prevVersion);

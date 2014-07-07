@@ -165,7 +165,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
                 console.log($scope.activities[i][prevVersion]);
                 
                 $scope.activities[i] = angular.copy(activity);
-                $scope.activities[i][prevVersion] = angular.copy($scope.editbActivityLastRev);
+                $scope.activities[i][prevVersion] = angular.copy(this.editbActivityLastRev);
                 
                 console.log($scope.editbActivityLastRev);
                 console.log(prevVersion);

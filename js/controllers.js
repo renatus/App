@@ -143,6 +143,8 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         //
         activity["lastVersion"] = curVersion;
+        //Restore now-previous version, as it was modified while user edited activity
+        activity[prevVersion] = angular.copy(this.editbActivityLastRev);
         
         
         //Update entry in local DB
@@ -158,10 +160,10 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
 
                 
                 $scope.activities[i] = angular.copy(activity);
-                $scope.activities[i][prevVersion] = angular.copy(this.editbActivityLastRev);
+                //$scope.activities[i][prevVersion] = angular.copy(this.editbActivityLastRev);
                 
                 console.log("And this: ");
-                console.log(this.editbActivityLastRev);
+                console.log($scope.activities[i]);
                 
                 break;
             }

@@ -175,7 +175,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
                 break;
             }
         }
-        delete $scope.editbActivityLastRev;
+        delete this.editbActivityLastRev;
         delete activity;
         
     }

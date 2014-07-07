@@ -160,10 +160,16 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
                 console.log(this.editbActivityLastRev);
                 
                 //TODO:EDIT
-                $scope.activities[i] = angular.copy(activity);
                 console.log("And this: ");
                 console.log($scope.activities[i]);
+                console.log($scope.activities[i][prevVersion]);
+                
+                $scope.activities[i] = angular.copy(activity);
                 $scope.activities[i][prevVersion] = angular.copy($scope.editbActivityLastRev);
+                
+                console.log($scope.activities[i]);
+                console.log($scope.activities[i][prevVersion]);
+                
                 break;
             }
         }

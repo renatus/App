@@ -153,24 +153,15 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         
         
         for (var i = 0; i < $scope.activities.length; i++){
-            if ($scope.activities[i].uuid == activity.uuid){
-                console.log($scope.activities[i]);
-                console.log(activity);
-                console.log("This: ");
-                console.log(this.editbActivityLastRev);
-                
+            if ($scope.activities[i].uuid == activity.uuid){        
                 //TODO:EDIT
-                console.log("And this: ");
-                console.log($scope.activities[i]);
-                console.log($scope.activities[i][prevVersion]);
+
                 
                 $scope.activities[i] = angular.copy(activity);
                 $scope.activities[i][prevVersion] = angular.copy(this.editbActivityLastRev);
                 
-                console.log($scope.editbActivityLastRev);
-                console.log(prevVersion);
-                console.log($scope.activities[i]);
-                console.log($scope.activities[i][prevVersion]);
+                console.log("And this: ");
+                console.log(this.editbActivityLastRev);
                 
                 break;
             }
@@ -452,9 +443,10 @@ app.directive("editActivity", function() {
             $scope.editbActivityLangcode = angular.copy($scope['activity'][$scope['activity']['lastVersion']]['langcode']);
             $scope.editbActivityLastRev = angular.copy($scope['activity'][$scope['activity']['lastVersion']]);
             
-            //console.log("This obj: ");
+            
+            console.log("This obj: ");
             //console.log($scope['activity'][$scope['activity']['lastVersion']]);
-            //console.log($scope.editbActivityLangcode);
+            console.log($scope.editbActivityLastRev);
             
             //$scope.editbActivity = JSON.parse(JSON.stringify($scope.activity));
             

@@ -62,7 +62,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     $scope.filterNot123 = function(activity){
         
         //console.log(activity);
-        if (activity["0"]["title"][activity["0"]["langcode"]] == "123"){
+        if (activity[activity["lastVersion"]]["title"][activity[activity["lastVersion"]]["langcode"]] == "not show"){
             return false; // this will be listed in the results
         }
         
@@ -103,6 +103,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
                 "modifiedTimeStamp": curTimestamp
             }
 		};
+        //Entry is new, so revision number should be "0"
         newEntry["0"]["title"][langcode] = activity.title;        
         
         $scope.activities.push(newEntry);

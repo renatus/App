@@ -14,9 +14,6 @@ app.filter('orderObjectByINT', function(){
         }
         
         array.sort(function(a, b){            
-            //a = parseInt(a[0][attribute][a[0]['langcode']]);
-            //b = parseInt(b[0][attribute][b[0]['langcode']]);
-
             a = parseInt(a[a['lastVersion']][attribute][a[a['lastVersion']]['langcode']]);
             b = parseInt(b[b['lastVersion']][attribute][b[b['lastVersion']]['langcode']]);
             return a - b;
@@ -39,8 +36,8 @@ app.filter('orderObjectByTXT', function(){
         
         array.sort(function(a, b){            
             //.toString() will convert numbers to text, and they'll be sorted in order like: 1, 12, 1218, 2, 24, 3, 4, 5, 6...
-            var alc = a[0][attribute]['en'].toString().toLowerCase();
-            var blc = b[0][attribute]['en'].toString().toLowerCase();
+            var alc = a[a['lastVersion']][attribute][a[a['lastVersion']]['langcode']].toString().toLowerCase();
+            var blc = b[b['lastVersion']][attribute][b[b['lastVersion']]['langcode']].toString().toLowerCase();
             
             return alc > blc ? 1 : alc < blc ? -1 : 0;
         });

@@ -61,12 +61,12 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
     
     $scope.filterNot123 = function(activity){
         
-        //console.log(activity);
+        //If filter condition is met, in this case, entry's title is "not show"
         if (activity[activity["lastVersion"]]["title"][activity[activity["lastVersion"]]["langcode"]] == "not show"){
-            return false; // this will be listed in the results
+            return false; //this will NOT be listed in the results
         }
         
-        return true; // otherwise it won't be within the results
+        return true; //this WILL BE within the results
     };
 	
 	

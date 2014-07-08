@@ -159,13 +159,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
             if ($scope.activities[i].uuid == activity.uuid){        
                 //TODO:EDIT
 
-                
                 $scope.activities[i] = angular.copy(activity);
-                //$scope.activities[i][prevVersion] = angular.copy(this.editbActivityLastRev);
-                
-                console.log("And this: ");
-                console.log($scope.activities[i]);
-                
                 break;
             }
         }
@@ -431,30 +425,11 @@ app.directive("editActivity", function() {
         //scope: {
         //    value: "=clickToEdit",
         //},
-        controller: function($scope) {
-            //console.log($scope.activity);
-            
-            //Object will be passed by reference
-            //$scope.view.editbActivity = $scope.activity;
-            
-            //$scope.view = {
-                //editbActivity: $scope.activity,
-            //    editorEnabled: false
-            //};
-            
+        controller: function($scope) {            
             $scope.editbActivity = angular.copy($scope.activity);
             $scope.editbActivityLangcode = angular.copy($scope['activity'][$scope['activity']['lastVersion']]['langcode']);
             $scope.editbActivityLastRev = angular.copy($scope['activity'][$scope['activity']['lastVersion']]);
             
-            
-            console.log("This obj: ");
-            //console.log($scope['activity'][$scope['activity']['lastVersion']]);
-            console.log($scope.editbActivityLastRev);
-            
-            //$scope.editbActivity = JSON.parse(JSON.stringify($scope.activity));
-            
-            //Will delete only reference, not object itself, but that may help to garbage collector 
-            //delete $scope.editbActivity;
         }
     };
 });

@@ -1,6 +1,22 @@
 var app = angular.module('testApp', ['exoFilters']);
 
 
+ 
+app.config(['$routeProvider',
+  function($routeProvider) {
+      $routeProvider.
+      when('/activities/:activityId', {
+          templateUrl: 'templates/activity.html',
+          controller: 'showActivityController'
+      });
+}]);
+ 
+ 
+app.controller('showActivityController', function($scope, $routeParams) {
+    $scope.activity_id = $routeParams.activityId; 
+});
+
+
 
 //orderBy only works with arrays, not with objects
 // http://stackoverflow.com/questions/14478106/angularjs-sorting-by-property

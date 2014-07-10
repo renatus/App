@@ -5,6 +5,7 @@ var app = angular.module('testApp', ['ngRoute', 'exoFilters']);
 app.config(['$routeProvider',
   function($routeProvider) {
       $routeProvider.
+      //You can call a page with URL like this: http://yourdomain.com/#/activities/123
       when('/activities/:activityId', {
           templateUrl: 'templates/activity.html',
           controller: 'showActivityController'
@@ -13,7 +14,17 @@ app.config(['$routeProvider',
  
  
 app.controller('showActivityController', function($scope, $routeParams) {
-    $scope.activity_id = $routeParams.activityId; 
+    //Get parameter value from the URL
+    var activityID = $routeParams.activityId;
+    $scope.activity_id = activityID;
+    
+    for (var i = 0; i < $scope.activities.length; i++){
+        if ($scope.activities[i].uuid == activityID){
+            //DANGER
+            $scope.activity = angular.copy($scope.activities[i]);
+            break;
+        }
+    }
 });
 
 

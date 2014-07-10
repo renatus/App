@@ -2,7 +2,30 @@ var app = angular.module('testApp', ['ngRoute', 'exoFilters']);
 
 
  
+app.config(['$routeProvider',
+  function($routeProvider) {
+      $routeProvider.
+      //You can call a page with URL like this: http://yourdomain.com/#/activities/123
+      when('/activities/:activityId', {
+          templateUrl: 'templates/activity.html',
+          controller: 'showActivityController'
+      });
+}]);
 
+//TODO: fix execution before $scope.activities initialisation in case we're opening specific activity page as a first page
+app.controller('showActivityController', function($scope, $routeParams) {
+    //Get parameter value from the URL
+    var activityID = $routeParams.activityId;
+    $scope.activity_id = activityID;
+    
+    for (var i = 0; i < $scope.activities.length; i++){
+        if ($scope.activities[i].uuid == activityID){
+            //DANGER
+            $scope.activity = angular.copy($scope.activities[i]);
+            break;
+        }
+    }
+});
 
 
 
@@ -479,34 +502,3 @@ function generateUUID4(){
     
     return uuid;
 }
-
-
-
-
-
-
-
-app.config(['$routeProvider',
-  function($routeProvider) {
-      $routeProvider.
-      //You can call a page with URL like this: http://yourdomain.com/#/activities/123
-      when('/activities/:activityId', {
-          templateUrl: 'templates/activity.html',
-          controller: 'showActivityController'
-      });
-}]);
- 
- 
-app.controller('showActivityController', function($scope, $routeParams) {
-    //Get parameter value from the URL
-    var activityID = $routeParams.activityId;
-    $scope.activity_id = activityID;
-    
-    for (var i = 0; i < $scope.activities.length; i++){
-        if ($scope.activities[i].uuid == activityID){
-            //DANGER
-            $scope.activity = angular.copy($scope.activities[i]);
-            break;
-        }
-    }
-});

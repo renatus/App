@@ -1,2 +1,5 @@
 <h2>Activity #{{activity_id}}</h2>
-Here are the details for activity <b>#{{activity.uuid}}</b>.
+Here are the details for activity <b>{{activity.uuid}}</b>.
+Last version: <b>{{activity.lastVersion}}</b>
+Created: <b>{{activity[activity['lastVersion']]['createdTimeStamp']}}</b>
+Modified: <b>{{activity[activity['lastVersion']]['modifiedTimeStamp']}}</b>

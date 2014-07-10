@@ -104,6 +104,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
 	
     //Open DB, get all entries and show them to user
 	$scope.init = function(){
+        console.log("Init started");
 		indexedDBexo.open().then(function(){            
             indexedDBexo.getAllTodoItems().then(function(data){
 				$scope.activities = data;

@@ -1,4 +1,4 @@
-var app = angular.module('testApp', ['exoFilters']);
+var app = angular.module('testApp', ['ngRoute', 'exoFilters']);
 
 
  

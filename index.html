@@ -66,7 +66,7 @@
             
             
             
-            <span ng-hide="editing" ng-click="editing = true">{{activity[activity['lastVersion']]['title'][activity[activity['lastVersion']]['langcode']]}} | {{activity[activity['lastVersion']]['langcode']}}</span>
+            <span ng-hide="editing" ng-click="editing = true">{{activity[activity['lastVersion']]['title'][activity[activity['lastVersion']]['langcode']]}} | {{activity[activity['lastVersion']]['langcode']}} | </span> <a ng-hide="editing" href="#/activities/{{activity.uuid}}">Details</a>
             <!--<span ng-hide="editing" ng-click="editing = true">{{activity[activity['lastVersion']]['langcode']}}</span>
             <span ng-hide="editing" ng-click="editing = true">{{activity['lastVersion']}}</span>-->
             <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>

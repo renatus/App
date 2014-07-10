@@ -16,7 +16,7 @@ app.config(['$routeProvider',
 app.controller('showActivityController', function($scope, $routeParams) {
     //Get parameter value from the URL
     var activityID = $routeParams.activityId;
-    $scope.activity_id = activityID;
+    $scope.activityID = activityID;
     
     for (var i = 0; i < $scope.activities.length; i++){
         if ($scope.activities[i].uuid == activityID){

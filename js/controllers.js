@@ -215,7 +215,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo, initexo) {
 
 
 //Service to initialize app
-app.service('initexo', function($q, indexedDBexo){
+app.service('initexo', function($q, $scope, indexedDBexo){
     console.log("Init started 2");
     indexedDBexo.open().then(function(){
         indexedDBexo.getAllTodoItems().then(function(data){

@@ -81,7 +81,7 @@ app.filter('orderObjectByTXT', function(){
 
 
 
-app.controller('StartCtrl', function ($scope, indexedDBexo) {
+app.controller('StartCtrl', function ($scope, indexedDBexo, initexo) {
     
 	//$scope.activities = [
 	//	{"nid":"6650","langcode":"en","title":"End an agreements with Stream ISP"},
@@ -113,7 +113,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
 		});
 	}
 	
-	$scope.init();
+	//$scope.init();
     
     
     
@@ -210,6 +210,19 @@ app.controller('StartCtrl', function ($scope, indexedDBexo) {
         });
     }    
 
+});
+
+
+
+//Service to initialize app
+app.service('initexo', function($q){
+    console.log("Init started 2");
+    indexedDBexo.open().then(function(){
+        indexedDBexo.getAllTodoItems().then(function(data){
+            $scope.activities = data;
+            console.log(data);
+        });	
+    });
 });
 
 

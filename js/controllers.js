@@ -115,6 +115,8 @@ app.controller('StartCtrl', function ($scope, indexedDBexo, initexo) {
 	
 	//$scope.init();
     
+    initexo.init();
+    
     
     
     //You can get user-entered field value without passing object to function with construction like $scope.activity.title
@@ -216,6 +218,9 @@ app.controller('StartCtrl', function ($scope, indexedDBexo, initexo) {
 
 //Service to initialize app
 app.service('initexo', function($q, indexedDBexo){
+    
+    this.init = function() {
+        
     console.log("Init started 2");
     
     var deferred = $q.defer();
@@ -229,6 +234,8 @@ app.service('initexo', function($q, indexedDBexo){
     });
     
     return deferred.promise;
+        
+    }
 });
 
 

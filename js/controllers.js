@@ -219,7 +219,7 @@ app.service('initexo', function($q, $rootScope, indexedDBexo){
     console.log("Init started 2");
     indexedDBexo.open().then(function(){
         indexedDBexo.getAllTodoItems().then(function(data){
-            $scope.activities = data;
+            //$scope.activities = data;
             console.log(data);
         });	
     });

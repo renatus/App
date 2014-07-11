@@ -215,14 +215,20 @@ app.controller('StartCtrl', function ($scope, indexedDBexo, initexo) {
 
 
 //Service to initialize app
-app.service('initexo', function($q, $rootScope, indexedDBexo){
+app.service('initexo', function($q, indexedDBexo){
     console.log("Init started 2");
+    
+    var deferred = $q.defer();
+    
     indexedDBexo.open().then(function(){
         indexedDBexo.getAllTodoItems().then(function(data){
             //$scope.activities = data;
             console.log(data);
+            deferred.resolve();
         });	
     });
+    
+    return deferred.promise;
 });
 
 

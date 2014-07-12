@@ -16,6 +16,8 @@ app.config(['$routeProvider',
       });
 }]);
 
+
+
 //TODO: fix execution before $scope.activities initialisation in case we're opening specific activity page as a first page
 app.controller('showActivityController', function($scope, $routeParams) {
     //Get parameter value from the URL
@@ -115,7 +117,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo, initexo) {
 	
 	$scope.init();
     
-    initexo.init();
+    //initexo.init();
     
     
     

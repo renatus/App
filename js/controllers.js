@@ -164,7 +164,24 @@ app.controller('StartCtrl', function ($scope, $q, indexedDBexo, initexo) {
             
             console.log('Activity deleted!');
         });
-    }    
+    } 
+    
+    
+    
+    //
+    //Get parameter value from the URL
+    var activity2ID = $routeParams.activityId;
+    $scope.activity2ID = activity2ID;
+    
+    for (var i = 0; i < $scope.activities.length; i++){
+        if ($scope.activities[i].uuid == activity2ID){
+            //DANGER
+            $scope.activity2 = angular.copy($scope.activities[i]);
+            break;
+        }
+    }
+    
+    
 
 });
 
@@ -185,27 +202,6 @@ app.controller('StartCtrl', function ($scope, $q, indexedDBexo, initexo) {
 //    }
 //});
 
-
-
-app.controller('showActivityController', function($scope, $routeParams) {
-    //$injector.invoke(app.StartCtrl, this, {$scope: $scope});
-    
-    //Get parameter value from the URL
-    var activityID = $routeParams.activityId;
-    $scope.activityID = activityID;
-    
-    var getCurActivity = function($scope, activityID){
-        for (var i = 0; i < $scope.activities.length; i++){
-            if ($scope.activities[i].uuid == activityID){
-                //DANGER
-                return $scope.activities[i];
-                break;
-            }
-        }
-    }
-    
-    $scope.activity = angular.copy(getCurActivity($scope, activityID));
-});
 
 
 //orderBy only works with arrays, not with objects

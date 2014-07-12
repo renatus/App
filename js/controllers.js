@@ -187,7 +187,7 @@ app.controller('StartCtrl', function ($scope, $q, indexedDBexo, initexo) {
 
 
 
-app.controller('showActivityController', function($scope, $routeParams, StartCtrl) {
+app.controller('showActivityController', function($scope, $routeParams) {
     //$injector.invoke(app.StartCtrl, this, {$scope: $scope});
     
     //Get parameter value from the URL

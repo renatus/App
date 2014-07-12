@@ -19,20 +19,39 @@ app.config(['$routeProvider',
 
 
 //TODO: fix execution before $scope.activities initialisation in case we're opening specific activity page as a first page
+//app.controller('showActivityController', function($scope, $routeParams) {
+    //Get parameter value from the URL
+//    var activityID = $routeParams.activityId;
+//    $scope.activityID = activityID;
+    
+//    for (var i = 0; i < $scope.activities.length; i++){
+//        if ($scope.activities[i].uuid == activityID){
+            //DANGER
+//            $scope.activity = angular.copy($scope.activities[i]);
+//            break;
+//        }
+//    }
+//});
+
+
+
 app.controller('showActivityController', function($scope, $routeParams) {
     //Get parameter value from the URL
     var activityID = $routeParams.activityId;
     $scope.activityID = activityID;
     
-    for (var i = 0; i < $scope.activities.length; i++){
-        if ($scope.activities[i].uuid == activityID){
-            //DANGER
-            $scope.activity = angular.copy($scope.activities[i]);
-            break;
+    var getCurActivity = function($scope, activityID){
+        for (var i = 0; i < $scope.activities.length; i++){
+            if ($scope.activities[i].uuid == activityID){
+                //DANGER
+                return $scope.activities[i];
+                break;
+            }
         }
     }
+    
+    $scope.activity = angular.copy(getCurActivity($scope, activityID));
 });
-
 
 
 //orderBy only works with arrays, not with objects

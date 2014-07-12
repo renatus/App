@@ -2,7 +2,7 @@ var app = angular.module('testApp', ['ngRoute', 'exoFilters']);
 
 
  
-app.config(['$routeProvider',
+app.config(['$routeProvider', 'initexo',
   function($routeProvider) {
       $routeProvider.
       //You can call a page with URL like this: http://yourdomain.com/#/activities/123

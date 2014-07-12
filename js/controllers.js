@@ -35,7 +35,9 @@ app.config(['$routeProvider',
 
 
 
-app.controller('showActivityController', function($scope, $routeParams) {
+app.controller('showActivityController', function($scope, $routeParams, $injector) {
+    $injector.invoke(StartCtrl, this, {$scope: $scope});
+    
     //Get parameter value from the URL
     var activityID = $routeParams.activityId;
     $scope.activityID = activityID;

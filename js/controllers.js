@@ -102,7 +102,7 @@ app.filter('orderObjectByTXT', function(){
 
 
 
-app.controller('StartCtrl', function ($scope, indexedDBexo, initexo) {
+app.controller('StartCtrl', function ($scope, $q, indexedDBexo, initexo) {
     
 	//$scope.activities = [
 	//	{"nid":"6650","langcode":"en","title":"End an agreements with Stream ISP"},
@@ -124,14 +124,31 @@ app.controller('StartCtrl', function ($scope, indexedDBexo, initexo) {
 	
 	
     //Open DB, get all entries and show them to user
-	$scope.init = function(){
+	//$scope.init = function(){
+    //    console.log("Init started");
+	//	indexedDBexo.open().then(function(){            
+    //        indexedDBexo.getAllTodoItems().then(function(data){
+	//			$scope.activities = data;
+    //            console.log(data);
+	//		});			
+	//	});
+	//}
+    
+    $scope.init = function(){
         console.log("Init started");
+        
+        var deferred = $q.defer();
+        
 		indexedDBexo.open().then(function(){            
             indexedDBexo.getAllTodoItems().then(function(data){
 				$scope.activities = data;
                 console.log(data);
+                
+                deferred.resolve();
 			});			
 		});
+        
+        return deferred.promise;
 	}
 	
 	$scope.init();

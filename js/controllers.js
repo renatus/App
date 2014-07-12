@@ -188,7 +188,7 @@ app.controller('StartCtrl', function ($scope, $q, indexedDBexo, initexo) {
 
 
 app.controller('showActivityController', function($scope, $routeParams, $injector) {
-    $injector.invoke(StartCtrl, this, {$scope: $scope});
+    $injector.invoke(app.StartCtrl, this, {$scope: $scope});
     
     //Get parameter value from the URL
     var activityID = $routeParams.activityId;

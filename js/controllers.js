@@ -113,7 +113,7 @@ app.controller('StartCtrl', function ($scope, indexedDBexo, initexo) {
 		});
 	}
 	
-	//$scope.init();
+	$scope.init();
     
     initexo.init();
     

@@ -18,92 +18,6 @@ app.config(['$routeProvider',
 
 
 
-//TODO: fix execution before $scope.activities initialisation in case we're opening specific activity page as a first page
-//app.controller('showActivityController', function($scope, $routeParams) {
-    //Get parameter value from the URL
-//    var activityID = $routeParams.activityId;
-//    $scope.activityID = activityID;
-    
-//    for (var i = 0; i < $scope.activities.length; i++){
-//        if ($scope.activities[i].uuid == activityID){
-            //DANGER
-//            $scope.activity = angular.copy($scope.activities[i]);
-//            break;
-//        }
-//    }
-//});
-
-
-
-app.controller('showActivityController', function($scope, $routeParams, $injector) {
-    $injector.invoke(StartCtrl, this, {$scope: $scope});
-    
-    //Get parameter value from the URL
-    var activityID = $routeParams.activityId;
-    $scope.activityID = activityID;
-    
-    var getCurActivity = function($scope, activityID){
-        for (var i = 0; i < $scope.activities.length; i++){
-            if ($scope.activities[i].uuid == activityID){
-                //DANGER
-                return $scope.activities[i];
-                break;
-            }
-        }
-    }
-    
-    $scope.activity = angular.copy(getCurActivity($scope, activityID));
-});
-
-
-//orderBy only works with arrays, not with objects
-// http://stackoverflow.com/questions/14478106/angularjs-sorting-by-property
-app.filter('orderObjectByINT', function(){
-    return function(input, attribute, reverse) {
-        if (!angular.isObject(input)) return input;
-            
-        var array = [];
-        for (var objectKey in input) {
-            array.push(input[objectKey]);
-        }
-        
-        array.sort(function(a, b){            
-            a = parseInt(a[a['lastVersion']][attribute][a[a['lastVersion']]['langcode']]);
-            b = parseInt(b[b['lastVersion']][attribute][b[b['lastVersion']]['langcode']]);
-            return a - b;
-        });
-        
-        if (reverse == 'descend') array.reverse();
-        
-        return array;
-    }
-});
-
-app.filter('orderObjectByTXT', function(){
-    return function(input, attribute, reverse) {
-        if (!angular.isObject(input)) return input;
-            
-        var array = [];
-        for (var objectKey in input) {
-            array.push(input[objectKey]);
-        }
-        
-        array.sort(function(a, b){            
-            //.toString() will convert numbers to text, and they'll be sorted in order like: 1, 12, 1218, 2, 24, 3, 4, 5, 6...
-            var alc = a[a['lastVersion']][attribute][a[a['lastVersion']]['langcode']].toString().toLowerCase();
-            var blc = b[b['lastVersion']][attribute][b[b['lastVersion']]['langcode']].toString().toLowerCase();
-            
-            return alc > blc ? 1 : alc < blc ? -1 : 0;
-        });
-        
-        if (reverse == 'descend') array.reverse();
-        
-        return array;
-    }
-});
-
-
-
 app.controller('StartCtrl', function ($scope, $q, indexedDBexo, initexo) {
     
 	//$scope.activities = [
@@ -253,6 +167,96 @@ app.controller('StartCtrl', function ($scope, $q, indexedDBexo, initexo) {
     }    
 
 });
+
+
+
+//TODO: fix execution before $scope.activities initialisation in case we're opening specific activity page as a first page
+//app.controller('showActivityController', function($scope, $routeParams) {
+    //Get parameter value from the URL
+//    var activityID = $routeParams.activityId;
+//    $scope.activityID = activityID;
+    
+//    for (var i = 0; i < $scope.activities.length; i++){
+//        if ($scope.activities[i].uuid == activityID){
+            //DANGER
+//            $scope.activity = angular.copy($scope.activities[i]);
+//            break;
+//        }
+//    }
+//});
+
+
+
+app.controller('showActivityController', function($scope, $routeParams, $injector) {
+    $injector.invoke(StartCtrl, this, {$scope: $scope});
+    
+    //Get parameter value from the URL
+    var activityID = $routeParams.activityId;
+    $scope.activityID = activityID;
+    
+    var getCurActivity = function($scope, activityID){
+        for (var i = 0; i < $scope.activities.length; i++){
+            if ($scope.activities[i].uuid == activityID){
+                //DANGER
+                return $scope.activities[i];
+                break;
+            }
+        }
+    }
+    
+    $scope.activity = angular.copy(getCurActivity($scope, activityID));
+});
+
+
+//orderBy only works with arrays, not with objects
+// http://stackoverflow.com/questions/14478106/angularjs-sorting-by-property
+app.filter('orderObjectByINT', function(){
+    return function(input, attribute, reverse) {
+        if (!angular.isObject(input)) return input;
+            
+        var array = [];
+        for (var objectKey in input) {
+            array.push(input[objectKey]);
+        }
+        
+        array.sort(function(a, b){            
+            a = parseInt(a[a['lastVersion']][attribute][a[a['lastVersion']]['langcode']]);
+            b = parseInt(b[b['lastVersion']][attribute][b[b['lastVersion']]['langcode']]);
+            return a - b;
+        });
+        
+        if (reverse == 'descend') array.reverse();
+        
+        return array;
+    }
+});
+
+app.filter('orderObjectByTXT', function(){
+    return function(input, attribute, reverse) {
+        if (!angular.isObject(input)) return input;
+            
+        var array = [];
+        for (var objectKey in input) {
+            array.push(input[objectKey]);
+        }
+        
+        array.sort(function(a, b){            
+            //.toString() will convert numbers to text, and they'll be sorted in order like: 1, 12, 1218, 2, 24, 3, 4, 5, 6...
+            var alc = a[a['lastVersion']][attribute][a[a['lastVersion']]['langcode']].toString().toLowerCase();
+            var blc = b[b['lastVersion']][attribute][b[b['lastVersion']]['langcode']].toString().toLowerCase();
+            
+            return alc > blc ? 1 : alc < blc ? -1 : 0;
+        });
+        
+        if (reverse == 'descend') array.reverse();
+        
+        return array;
+    }
+});
+
+
+
+
 
 
 

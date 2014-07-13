@@ -202,19 +202,18 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
     $scope.activity2ID = activity2ID;
     
     
-    var tt = 0;
+
     $scope.$watch("activities", function(newValue, oldValue) {
-        console.log(tt);
-        
-    tt++;
-        
-    for (var i = 0; i < $scope.activities.length; i++){
-        if ($scope.activities[i].uuid == activity2ID){
-            //DANGER
-            $scope.activity2 = angular.copy($scope.activities[i]);
-            break;
+        if($scope.activities){
+            
+            for (var i = 0; i < $scope.activities.length; i++){
+                if ($scope.activities[i].uuid == activity2ID){
+                    //DANGER
+                    $scope.activity2 = angular.copy($scope.activities[i]);
+                    break;
+                }
+            }
         }
-    }
         
     });
     

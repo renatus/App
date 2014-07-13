@@ -90,6 +90,10 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
 	}
     
     //$scope.activities = $scope.init2();
+    var proms = $scope.init2();
+    proms.then(function(data) {
+        $scope.activities = data;
+    });
     console.log('This: ');
     console.log($scope.activities);
     

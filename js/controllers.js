@@ -89,6 +89,8 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
 	}
     
     $scope.activities = $scope.init2();
+    console.log('This: ');
+    console.log($scope.activities);
     
     
     

@@ -67,9 +67,29 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo, in
         return deferred.promise;
 	}
 	
-	$scope.init();
+	//$scope.init();
     
     //initexo.init();
+    
+    
+    $scope.init2 = function(){
+        console.log("Init started");
+        
+        var deferred = $q.defer();
+        
+		indexedDBexo.open().then(function(){            
+            indexedDBexo.getAllTodoItems().then(function(data){
+                console.log(data);
+                
+                deferred.resolve(data);
+			});			
+		});
+        
+        return deferred.promise;
+	}
+    
+    $scope.activities = $scope.init2();
+    
     
     
     
@@ -247,34 +267,6 @@ app.filter('orderObjectByTXT', function(){
         if (reverse == 'descend') array.reverse();
         
         return array;
-    }
-});
-
-
-
-
-
-
-
-//Service to initialize app
-app.service('initexo', function($q, indexedDBexo){
-    
-    this.init = function() {
-        
-    console.log("Init started 2");
-    
-    var deferred = $q.defer();
-    
-    indexedDBexo.open().then(function(){
-        indexedDBexo.getAllTodoItems().then(function(data){
-            //$scope.activities = data;
-            console.log(data);
-            deferred.resolve();
-        });	
-    });
-    
-    return deferred.promise;
-        
     }
 });
 

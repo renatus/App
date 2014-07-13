@@ -72,7 +72,7 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
     //initexo.init();
     
     
-    $scope.init2 = function(){
+    $scope.init2 = function($q){
         console.log("Init started");
         
         var deferred = $q.defer();

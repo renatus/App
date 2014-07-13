@@ -18,7 +18,7 @@ app.config(['$routeProvider',
 
 
 
-app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo, initexo) {
+app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
     
 	//$scope.activities = [
 	//	{"nid":"6650","langcode":"en","title":"End an agreements with Stream ISP"},

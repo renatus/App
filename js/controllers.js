@@ -201,6 +201,10 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
     var activity2ID = $routeParams.activityId;
     $scope.activity2ID = activity2ID;
     
+    
+    
+    $scope.$watch("activities", function(newValue, oldValue) {
+        
     for (var i = 0; i < $scope.activities.length; i++){
         if ($scope.activities[i].uuid == activity2ID){
             //DANGER
@@ -208,6 +212,8 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
             break;
         }
     }
+        
+    });
     
     
 

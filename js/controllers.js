@@ -8,7 +8,8 @@ app.config(['$routeProvider',
       //You can call a page with URL like this: http://yourdomain.com/#/activities/123
       when('/activities/:activityId', {
           templateUrl: 'templates/activity.html',
-          controller: 'showActivityController'
+          //controller: 'showActivityController'
+          controller: 'StartCtrl'
       }).
       
       otherwise({

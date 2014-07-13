@@ -88,7 +88,7 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
         return deferred.promise;
 	}
     
-    $scope.activities = $scope.init2();
+    $scope.activities = $scope.init2($q);
     console.log('This: ');
     console.log($scope.activities);
     

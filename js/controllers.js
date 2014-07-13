@@ -81,7 +81,7 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
             indexedDBexo.getAllTodoItems().then(function(data){
                 console.log(data);
                 
-                deferred.resolve(data);
+                deferred.resolve('data');
 			});			
 		});
         

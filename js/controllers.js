@@ -72,8 +72,9 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
     //initexo.init();
     
     
-    $scope.init2 = function($q){
+    $scope.init2 = function(){
         console.log("Init started");
+        var data = [];
         
         var deferred = $q.defer();
         
@@ -81,14 +82,14 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
             indexedDBexo.getAllTodoItems().then(function(data){
                 console.log(data);
                 
-                deferred.resolve('data');
+                deferred.resolve(data);
 			});			
 		});
         
         return deferred.promise;
 	}
     
-    $scope.activities = $scope.init2($q);
+    $scope.activities = $scope.init2();
     console.log('This: ');
     console.log($scope.activities);
     

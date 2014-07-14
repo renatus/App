@@ -68,35 +68,35 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
         return deferred.promise;
 	}
 	
-	//$scope.init();
+	$scope.init();
     
-    //initexo.init();
+
     
     
-    $scope.init2 = function(){
-        console.log("Init started");
-        var data = [];
+    //$scope.init2 = function(){
+    //    console.log("Init started");
+    //    var data = [];
         
-        var deferred = $q.defer();
+    //    var deferred = $q.defer();
         
-		indexedDBexo.open().then(function(){            
-            indexedDBexo.getAllTodoItems().then(function(data){
-                console.log(data);
+	//	indexedDBexo.open().then(function(){            
+    //        indexedDBexo.getAllTodoItems().then(function(data){
+    //            console.log(data);
                 
-                deferred.resolve(data);
-			});			
-		});
+    //            deferred.resolve(data);
+	//		});			
+	//	});
         
-        return deferred.promise;
-	}
+    //    return deferred.promise;
+	//}
     
-    //$scope.activities = $scope.init2();
-    var proms = $scope.init2();
-    proms.then(function(data) {
-        $scope.activities = data;
-    });
-    console.log('This: ');
-    console.log($scope.activities);
+
+    //var proms = $scope.init2();
+    //proms.then(function(data) {
+    //    $scope.activities = data;
+    //});
+    //console.log('This: ');
+    //console.log($scope.activities);
     
     
     

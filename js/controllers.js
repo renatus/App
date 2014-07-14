@@ -41,66 +41,37 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
 	
 	
     //Open DB, get all entries and show them to user
-	//$scope.init = function(){
-    //    console.log("Init started");
-	//	indexedDBexo.open().then(function(){            
-    //        indexedDBexo.getAllTodoItems().then(function(data){
-	//			$scope.activities = data;
-    //            console.log(data);
-	//		});			
-	//	});
-	//}
-    
-    $scope.init = function(){
+	$scope.init = function(){
         console.log("Init started");
-        
-        var deferred = $q.defer();
-        
 		indexedDBexo.open().then(function(){            
             indexedDBexo.getAllTodoItems().then(function(data){
 				$scope.activities = data;
                 console.log(data);
-                
-                deferred.resolve();
 			});			
 		});
-        
-        return deferred.promise;
 	}
-	
-	$scope.init();
     
-
-    
-    
-    //$scope.init2 = function(){
+    //$scope.init = function(){
     //    console.log("Init started");
-    //    var data = [];
         
     //    var deferred = $q.defer();
         
 	//	indexedDBexo.open().then(function(){            
     //        indexedDBexo.getAllTodoItems().then(function(data){
+	//			$scope.activities = data;
     //            console.log(data);
                 
-    //            deferred.resolve(data);
+    //            deferred.resolve();
 	//		});			
 	//	});
         
     //    return deferred.promise;
 	//}
-    
-
-    //var proms = $scope.init2();
-    //proms.then(function(data) {
-    //    $scope.activities = data;
-    //});
-    //console.log('This: ');
-    //console.log($scope.activities);
+	
+	$scope.init();
     
     
-    
-    
+        
     //You can get user-entered field value without passing object to function with construction like $scope.activity.title
     $scope.addEntry = function(activity){
         var curTimestamp = new Date().getTime();

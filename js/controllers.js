@@ -8,7 +8,6 @@ app.config(['$routeProvider',
       //You can call a page with URL like this: http://yourdomain.com/#/activities/123
       when('/activities/:activityId', {
           templateUrl: 'templates/activity.html',
-          //controller: 'showActivityController'
           controller: 'showActivityController'
       }).
       
@@ -186,7 +185,7 @@ app.controller('showActivityController', function($scope, $routeParams) {
         if($scope.activities){
             
             for (var i = 0; i < $scope.activities.length; i++){
-                if ($scope.activities[i].uuid == activity2ID){
+                if ($scope.activities[i].uuid == activityID){
                     //DANGER
                     $scope.activity = angular.copy($scope.activities[i]);
                     break;

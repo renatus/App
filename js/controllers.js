@@ -150,26 +150,25 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
     
     
     
-    //
     //Get parameter value from the URL
-    var activity2ID = $routeParams.activityId;
-    $scope.activity2ID = activity2ID;
+    //var activity2ID = $routeParams.activityId;
+    //$scope.activity2ID = activity2ID;
     
     
 
-    $scope.$watch("activities", function(newValue, oldValue) {
-        if($scope.activities){
+    //$scope.$watch("activities", function(newValue, oldValue) {
+    //    if($scope.activities){
             
-            for (var i = 0; i < $scope.activities.length; i++){
-                if ($scope.activities[i].uuid == activity2ID){
+    //        for (var i = 0; i < $scope.activities.length; i++){
+    //            if ($scope.activities[i].uuid == activity2ID){
                     //DANGER
-                    $scope.activity2 = angular.copy($scope.activities[i]);
-                    break;
-                }
-            }
-        }
+    //                $scope.activity2 = angular.copy($scope.activities[i]);
+    //                break;
+    //            }
+    //        }
+    //    }
         
-    });
+    //});
     
     
 
@@ -178,19 +177,25 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
 
 
 //TODO: fix execution before $scope.activities initialisation in case we're opening specific activity page as a first page
-//app.controller('showActivityController', function($scope, $routeParams) {
+app.controller('showActivityController', function($scope, $routeParams) {
     //Get parameter value from the URL
-//    var activityID = $routeParams.activityId;
-//    $scope.activityID = activityID;
+    var activityID = $routeParams.activityId;
+    $scope.activityID = activityID;
     
-//    for (var i = 0; i < $scope.activities.length; i++){
-//        if ($scope.activities[i].uuid == activityID){
-            //DANGER
-//            $scope.activity = angular.copy($scope.activities[i]);
-//            break;
-//        }
-//    }
-//});
+    $scope.$watch("activities", function(newValue, oldValue) {
+        if($scope.activities){
+            
+            for (var i = 0; i < $scope.activities.length; i++){
+                if ($scope.activities[i].uuid == activity2ID){
+                    //DANGER
+                    $scope.activity = angular.copy($scope.activities[i]);
+                    break;
+                }
+            }
+        }
+        
+    });
+});
 
 
 

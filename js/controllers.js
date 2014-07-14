@@ -25,19 +25,7 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
 	//	{"nid":"6650","langcode":"en","title":"End an agreements with Stream ISP"},
 	//	{"nid":"3188","langcode":"en","title":"Renew domain exocortex.pp.ua"}
 	//];
-    
-    
-    
-    $scope.filterNot123 = function(activity){
-        
-        //If filter condition is met, in this case, entry's title is "not show"
-        if (activity[activity["lastVersion"]]["title"][activity[activity["lastVersion"]]["langcode"]] == "not show"){
-            return false; //this will NOT be listed in the results
-        }
-        
-        return true; //this WILL BE within the results
-    };
-	
+    	
 	
 	
     //Open DB, get all entries and show them to user
@@ -50,23 +38,6 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
 			});			
 		});
 	}
-    
-    //$scope.init = function(){
-    //    console.log("Init started");
-        
-    //    var deferred = $q.defer();
-        
-	//	indexedDBexo.open().then(function(){            
-    //        indexedDBexo.getAllTodoItems().then(function(data){
-	//			$scope.activities = data;
-    //            console.log(data);
-                
-    //            deferred.resolve();
-	//		});			
-	//	});
-        
-    //    return deferred.promise;
-	//}
 	
 	$scope.init();
     
@@ -164,6 +135,18 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
             console.log('Activity deleted!');
         });
     } 
+    
+    
+    
+    $scope.filterNot123 = function(activity){
+        
+        //If filter condition is met, in this case, entry's title is "not show"
+        if (activity[activity["lastVersion"]]["title"][activity[activity["lastVersion"]]["langcode"]] == "not show"){
+            return false; //this will NOT be listed in the results
+        }
+        
+        return true; //this WILL BE within the results
+    };
     
     
     

@@ -9,7 +9,7 @@ app.config(['$routeProvider',
       when('/activities/:activityId', {
           templateUrl: 'templates/activity.html',
           //controller: 'showActivityController'
-          controller: 'StartCtrl'
+          controller: 'showActivityController'
       }).
       
       otherwise({

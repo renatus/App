@@ -148,28 +148,6 @@ app.controller('StartCtrl', function ($scope, $q, $routeParams, indexedDBexo) {
     };
     
     
-    
-    //Get parameter value from the URL
-    //var activity2ID = $routeParams.activityId;
-    //$scope.activity2ID = activity2ID;
-    
-    
-
-    //$scope.$watch("activities", function(newValue, oldValue) {
-    //    if($scope.activities){
-            
-    //        for (var i = 0; i < $scope.activities.length; i++){
-    //            if ($scope.activities[i].uuid == activity2ID){
-                    //DANGER
-    //                $scope.activity2 = angular.copy($scope.activities[i]);
-    //                break;
-    //            }
-    //        }
-    //    }
-        
-    //});
-    
-    
 
 });
 

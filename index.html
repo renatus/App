@@ -14,7 +14,7 @@
 	
 
     
-<body ng-controller="StartCtrl">
+<body ng-controller="activitiesController">
     
     
     
@@ -80,6 +80,7 @@
     
     
     
+    <!--newActivity-->
     <form name="addActivity" ng-submit="addEntry(activity)" novalidate >
         <label>Title:</label>
         <input type="text" ng-model="activity.title" placeholder="Title" required />

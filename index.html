@@ -36,36 +36,9 @@
     <ul>
         <!-- Single activity line -->
         <!-- Use "track by object.someUniqueKey" with ng-repeat to improve performance and prevent [ngRepeat:dupes] errors -->
-		<!-- orderBy standard filter works only with arrays, not with objects and sub-objects -->
-        <!--<li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderObjectBy:'modifiedTimeStamp' track by activity.uuid">-->
-        <!--You may order objects in ascending ('ascend') or in descending ('descend') order -->
-        <!--<li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderObjectByINT:'title':'ascend' track by activity.uuid">-->
-        <li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderObjectByINT:'title':orderChoice track by activity.uuid">
-            
-            
-            
-            <!--
-			<span ng-hide="editing" ng-click="editing = true">{{activity['0']['title'][activity.0.langcode]}} | {{activity.0.langcode}}</span>
-            <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>
-            
-            <form name="editActivity" ng-show="editing" ng-submit="editing = false; editEntry(activity)" novalidate >
-				<label>Title:</label>
-				<input type="text" ng-model="activity['0']['title'][activity.0.langcode]" placeholder="Title" required />
-                <label>Langcode:</label>
-				<select ng-model="activity.0.langcode" required >
-                    <option value="en">English</option>
-                    <option value="ru">Russian</option>
-                </select>
-				<br/>
-				<button class="btn" type="submit" ng-disabled="editActivity.$invalid">Save</button>
-			</form> -->
-            
-            
-            
-            <!--<span click-to-edit="activity.0.langcode"></span>-->
-            
-            
-            
+		<!-- orderBy standard filter works with arrays only, not with objects -->
+        <li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderObjectByINT:'title':orderChoice track by activity.uuid">          
+                        
             <span ng-hide="editing" ng-click="editing = true">{{activity[activity['lastVersion']]['title'][activity[activity['lastVersion']]['langcode']]}} | {{activity[activity['lastVersion']]['langcode']}} | </span> <a ng-hide="editing" href="#/activities/{{activity.uuid}}">Details</a>
             <!--<span ng-hide="editing" ng-click="editing = true">{{activity[activity['lastVersion']]['langcode']}}</span>
             <span ng-hide="editing" ng-click="editing = true">{{activity['lastVersion']}}</span>-->

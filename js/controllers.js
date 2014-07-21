@@ -160,7 +160,7 @@ app.controller('showActivityController', function($scope, $routeParams) {
     $scope.activityID = activityID;
     
     $scope.$watch("activities", function(newValue, oldValue) {
-        if($scope.activities){
+        if ($scope.activities){
             
             for (var i = 0; i < $scope.activities.length; i++){
                 if ($scope.activities[i].uuid == activityID){

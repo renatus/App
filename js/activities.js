@@ -102,7 +102,7 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
         //
         activity["lastVersion"] = curVersion;
         //Restore now-previous version, as it was modified while user edited activity
-        activity[prevVersion] = angular.copy(this.editActivityLastRev);
+        activity[prevVersion] = angular.copy(this.editbActivityLastRev);
         
         
         //Update entry in local DB
@@ -120,7 +120,7 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
                 break;
             }
         }
-        delete this.editActivityLastRev;
+        delete this.editbActivityLastRev;
         delete activity;
         
     }
@@ -465,9 +465,9 @@ app.directive("editActivity2", function() {
         //template: editorTemplate,
         templateUrl: "templates/edit-activity.html",
         controller: function($scope) {            
-            $scope.editActivity = angular.copy($scope.activity);
-            $scope.editActivityLangcode = angular.copy($scope['activity'][$scope['activity']['lastVersion']]['langcode']);
-            $scope.editActivityLastRev = angular.copy($scope['activity'][$scope['activity']['lastVersion']]);
+            $scope.editbActivity = angular.copy($scope.activity);
+            $scope.editbActivityLangcode = angular.copy($scope['activity'][$scope['activity']['lastVersion']]['langcode']);
+            $scope.editbActivityLastRev = angular.copy($scope['activity'][$scope['activity']['lastVersion']]);
             
         }
     };

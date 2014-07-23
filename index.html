@@ -40,14 +40,17 @@
             <!-- orderBy standard filter works with arrays only, not with objects -->
             <li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderObjectByINT:'title':orderChoice track by activity.uuid">
                 
-                <!-- Something like "ActivityTitle | en | Details"-->
-                <span ng-hide="editing" ng-click="editing = true">{{activity[activity['lastVersion']]['title'][activity[activity['lastVersion']]['langcode']]}} | {{activity[activity['lastVersion']]['langcode']}} | </span> <a ng-hide="editing" href="#/activities/{{activity.uuid}}">Details</a>
+                <!-- Something like "ActivityTitle | en |"-->
+                <span ng-hide="editing" ng-click="editing = true">{{activity[activity['lastVersion']]['title'][activity[activity['lastVersion']]['langcode']]}} | {{activity[activity['lastVersion']]['langcode']}} | </span>
+                <!--"Details" link, click will open subpage with this particularactivity details-->
+                <a ng-hide="editing" href="#/activities/{{activity.uuid}}">Details</a>
                 
                 <!--Button to delete this particular entry-->
                 <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>
                 
                 <!--Here activity editing form will be placed-->
-                <edit-activity2></edit-activity2>
+                <!--<edit-activity2></edit-activity2>-->
+                <span edit-activity2=""></span>
                 
             </li>
         </ul>

@@ -1,13 +1,18 @@
-<form name="editorActivity" ng-show="editing" ng-submit="editing = false; editEntry(editbActivity, editbActivityLangcode)" novalidate >
+<!--Form to edit existing activity-->
+<form name="editorActivity" ng-show="editing" ng-submit="editing = false; editEntry(editActivity, editActivityLangcode)" novalidate >
+    
+    <!--Activity title-->
     <label>Title:</label>
-    <input type="text" ng-model="editbActivity[editbActivity['lastVersion']]['title'][editbActivity[editbActivity['lastVersion']]['langcode']]" placeholder="Title" required />
+    <input type="text" ng-model="editActivity[editActivity['lastVersion']]['title'][editActivity[editActivity['lastVersion']]['langcode']]" placeholder="Title" required />
+    
+    <!--Activity language-->
     <label>Langcode:</label>
-
-    <select ng-model="editbActivityLangcode" required >
+    <select ng-model="editActivityLangcode" required >
         <option value="en">English</option>
         <option value="ru">Russian</option>
     </select>
-    
     <br/>
+    
+    <!--Button to add entered values to the model-->
     <button class="btn" type="submit" ng-disabled="editorActivity.$invalid">Save</button>
 </form>

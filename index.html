@@ -9,6 +9,7 @@
         <script type="text/javascript" src="libs/IndexedDBShim.min.js"></script>
         <script type="text/javascript" src="libs/angular.js"></script>
         <script type="text/javascript" src="libs/angular-route.js"></script>
+        
         <script src="js/activities.js"></script>
     </head>
     
@@ -45,30 +46,32 @@
                 <!--Button to delete this particular entry-->
                 <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>
                 
-                <!--This particular entry langcode -->
+                <!--Here activity editing form will be placed-->
                 <edit-activity></edit-activity>
+                
             </li>
         </ul>
-    
-    
-    
-    <!--newActivity-->
-    <form name="addActivity" ng-submit="addEntry(activity)" novalidate >
-        <label>Title:</label>
-        <input type="text" ng-model="activity.title" placeholder="Title" required />
-        <select ng-model="activity.langcode" required >
-            <option value="en">English</option>
-            <option value="ru">Russian</option>
-        </select>
-        <br/>
-        <button class="btn" type="submit" ng-disabled="addActivity.$invalid">Add</button>
-    </form>
-    
-    
-    
-    <ng-view></ng-view>
-
-
-     
-</body>
+        
+        
+        
+        <!--Form to add new activity-->
+        <form name="addActivity" ng-submit="addEntry(activity)" novalidate >
+            <label>Title:</label>
+            <input type="text" ng-model="activity.title" placeholder="Title" required />
+            <select ng-model="activity.langcode" required >
+                <option value="en">English</option>
+                <option value="ru">Russian</option>
+            </select>
+            <br/>
+            
+            <!--Button to add entered values to the model-->
+            <button class="btn" type="submit" ng-disabled="addActivity.$invalid">Add</button>
+        </form>
+        
+        
+        
+        <!-- Here single activity's page content will be placed-->
+        <ng-view></ng-view>
+        
+    </body>
 </html>

@@ -456,7 +456,7 @@ app.directive("clickToEdit", function() {
 
 
 //TODO:EDIT
-app.directive("editActivity", function() {
+app.directive("editActivity2", function() {
     //var editorTemplate = '';
 
     return {

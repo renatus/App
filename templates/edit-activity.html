@@ -1,14 +1,14 @@
-<form name="editorActivity" ng-show="editing" ng-submit="editing = false; editEntry(editbActivity, editbActivityLangcode)" novalidate >
-    <!--You should not put anything outside <form> tag, even comments-->
+<form name="editorActivity" ng-show="editing" ng-submit="editing = false; editEntry(editActivity, editActivityLangcode)" novalidate >
+    <!--You should not put anything outside root tag (<form> in this case), even comments-->
     <!--Form to edit existing activity-->
     
     <!--Activity title-->
     <label>Title:</label>
-    <input type="text" ng-model="editbActivity[editbActivity['lastVersion']]['title'][editbActivity[editbActivity['lastVersion']]['langcode']]" placeholder="Title" required >
+    <input type="text" ng-model="editActivity[editActivity['lastVersion']]['title'][editActivity[editActivity['lastVersion']]['langcode']]" placeholder="Title" required >
     
     <!--Activity language-->
     <label>Langcode:</label>
-    <select ng-model="editbActivityLangcode" required >
+    <select ng-model="editActivityLangcode" required >
         <option value="en">English</option>
         <option value="ru">Russian</option>
     </select>

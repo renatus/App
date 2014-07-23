@@ -456,7 +456,7 @@ app.directive("clickToEdit", function() {
 
 
 //TODO:EDIT
-app.directive("editActivity2", function() {
+app.directive("editActivity", function() {
 
     return {
         //Directive can be used as (element) Attribute or (custom) Element

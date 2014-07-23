@@ -465,9 +465,6 @@ app.directive("editActivity", function() {
         replace: true,
         //template: editorTemplate,
         templateUrl: "templates/edit-activity.html",
-        //scope: {
-        //    value: "=clickToEdit",
-        //},
         controller: function($scope) {            
             $scope.editbActivity = angular.copy($scope.activity);
             $scope.editbActivityLangcode = angular.copy($scope['activity'][$scope['activity']['lastVersion']]['langcode']);

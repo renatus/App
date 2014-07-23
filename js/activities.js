@@ -1,18 +1,24 @@
+//Modules are used to divide huge app in a logical parts - say, activities, checkins, health reports etc. may be handled by different modules
 var app = angular.module('testApp', ['ngRoute', 'exoFilters']);
 
 
- 
+
+//Set pre-defined URLs and URL patterns for your app
 app.config(['$routeProvider',
   function($routeProvider) {
       $routeProvider.
       //You can call a page with URL like this: http://yourdomain.com/#/activities/123
       when('/activities/:activityId', {
+          //HTML template for this URL pattern
           templateUrl: 'templates/activity.html',
+          //Angular controller for this URL pattern
           controller: 'showActivityController'
       }).
       
+      //If there is no such a page
       otherwise({
-        redirectTo: '/'
+          //Redirect user to
+          redirectTo: '/'
       });
 }]);
 

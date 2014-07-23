@@ -1,55 +1,52 @@
 <!DOCTYPE html>
 <html ng-app="testApp">
-<head>
-	<title>Test AngularJS app</title>
-    <!-- Custom CSS we need globally -->
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
-    
-    <!--IndexedDBShim allows to use IndexedDB in older browsers without native IndexedDB support, but with WebSQL available-->
-    <script type="text/javascript" src="libs/IndexedDBShim.min.js"></script>
-    <script type="text/javascript" src="libs/angular.js"></script>
-    <script type="text/javascript" src="libs/angular-route.js"></script>
-	<script src="js/controllers.js"></script>
-</head>
-	
-
-    
-<body ng-controller="activitiesController">
+    <head>
+        <title>Test AngularJS app</title>
+        <!-- Custom CSS we need globally -->
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+        
+        <!--IndexedDBShim allows us to use IndexedDB in older browsers without native IndexedDB support, but with WebSQL available-->
+        <script type="text/javascript" src="libs/IndexedDBShim.min.js"></script>
+        <script type="text/javascript" src="libs/angular.js"></script>
+        <script type="text/javascript" src="libs/angular-route.js"></script>
+        <script src="js/activities.js"></script>
+    </head>
     
     
     
-    Search: <input ng-model="userQuery">
-	
-	<select ng-model="orderChoice">
-        <option value="ascend">Ascending</option>
-		<option value="descend">Descending</option>
-	</select>
-	
-    <!-- This filter will search through all the fields, nod only through activity.langcode -->
-	<select ng-model="langcode">
-		<option value="en">English</option>
-		<option value="ru">Russian</option>
-	</select>
-    
-    
-    
-    <ul>
-        <!-- Single activity line -->
-        <!-- Use "track by object.someUniqueKey" with ng-repeat to improve performance and prevent [ngRepeat:dupes] errors -->
-		<!-- orderBy standard filter works with arrays only, not with objects -->
-        <li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderObjectByINT:'title':orderChoice track by activity.uuid">          
-                        
-            <span ng-hide="editing" ng-click="editing = true">{{activity[activity['lastVersion']]['title'][activity[activity['lastVersion']]['langcode']]}} | {{activity[activity['lastVersion']]['langcode']}} | </span> <a ng-hide="editing" href="#/activities/{{activity.uuid}}">Details</a>
-            <!--<span ng-hide="editing" ng-click="editing = true">{{activity[activity['lastVersion']]['langcode']}}</span>
-            <span ng-hide="editing" ng-click="editing = true">{{activity['lastVersion']}}</span>-->
-            <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>
-            
-            <span edit-activity="activity.0.langcode"></span>
-            
-            
-            
-		</li>
-	</ul>
+    <!--Controller to render list of all activities-->
+    <body ng-controller="activitiesController">
+        <!--Fulltext search, all object properties are indexed, so "1" query will result in list of all entries, containing number 1 in, say, UUID-->
+        Search: <input ng-model="userQuery">
+        
+        <!--Select sorting order for list of all activities-->
+        <select ng-model="orderChoice">
+            <option value="ascend">Ascending</option>
+            <option value="descend">Descending</option>
+        </select>
+        
+        <!-- This filter will search through all the fields, nod only through activity[activity['lastVersion']]['langcode'] -->
+        <select ng-model="langcode">
+            <option value="en">English</option>
+            <option value="ru">Russian</option>
+        </select>
+        
+        
+        <!--List of all activities-->
+        <ul>
+            <!-- Single activity line -->
+            <!-- Use "track by object.someUniqueKey" with ng-repeat to improve performance and prevent [ngRepeat:dupes] errors -->
+            <!-- orderBy standard filter works with arrays only, not with objects -->
+            <li ng-repeat="activity in activities | filter:userQuery | filter:langcode | filter:filterNot123 | orderObjectByINT:'title':orderChoice track by activity.uuid">
+                
+                <!-- Something like "ActivityTitle | en | Details"-->
+                <span ng-hide="editing" ng-click="editing = true">{{activity[activity['lastVersion']]['title'][activity[activity['lastVersion']]['langcode']]}} | {{activity[activity['lastVersion']]['langcode']}} | </span> <a ng-hide="editing" href="#/activities/{{activity.uuid}}">Details</a>
+                
+                <!--Button to delete this particular entry-->
+                <button ng-hide="editing" ng-click="deleteEntry(activity)">Del</button>
+                
+            </li>
+        </ul>
     
     
     

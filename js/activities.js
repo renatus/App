@@ -123,17 +123,18 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
         activity[prevVersion] = angular.copy(this.editActivityLastRev);
         
         
-        //Update entry in DB
+        //Update entry at DB
         indexedDBexo.addEntry(activity).then(function(){
             console.log('Activity edited!');
         });
         
         //Update entry at $scope
         for (var i = 0; i < $scope.activities.length; i++){
+            //If edited activity UUID is equal to found activity UUID
             if ($scope.activities[i].uuid == activity.uuid){        
-                //TODO:EDIT
-
+                //Update entry at $scope
                 $scope.activities[i] = angular.copy(activity);
+                //Stop searching through all $scope entries
                 break;
             }
         }
@@ -147,50 +148,57 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
     
     
     //Delete activity entry at $scope and DB 
-    $scope.deleteEntry = function(activity){        
+    $scope.deleteEntry = function(activity){
+        //Delete entry at DB
         indexedDBexo.deleteEntry(activity).then(function(){
+            //Delete entry at $scope
             $scope.activities.splice($scope.activities.indexOf(activity), 1 );
-            
             console.log('Activity deleted!');
         });
     } 
     
     
     
+    //Filter to hide activities with title "not show" from ng-repeat list
     $scope.filterNot123 = function(activity){
-        
         //If filter condition is met, in this case, entry's title is "not show"
         if (activity[activity["lastVersion"]]["title"][activity[activity["lastVersion"]]["langcode"]] == "not show"){
-            return false; //this will NOT be listed in the results
+            //This entry will not be listed in the results
+            return false; 
         }
         
-        return true; //this WILL BE within the results
+        //This entry will be within the results
+        return true; 
     };
     
-    
-
 });
 
 
 
-//TODO: fix execution before $scope.activities initialisation in case we're opening specific activity page as a first page
+//Controller to show single activity on a subpage
 app.controller('showActivityController', function($scope, $routeParams) {
     //Get parameter value from the URL
     var activityID = $routeParams.activityId;
+    //Set current activity ID
     $scope.activityID = activityID;
     
+    //We should watch for changes at activity to show it when it is fully loaded from DB
+    //Loading from DB is async, so $scope.activities will be empty in case we're loadind activity page from the start
+    //Activity will be updated, right after it was changed
     $scope.$watch("activities", function(newValue, oldValue) {
+        //If activity is fully loaded
         if ($scope.activities){
-            
+            //Search through all activities
             for (var i = 0; i < $scope.activities.length; i++){
+                //If watched activity UUID is equal to found activity UUID
                 if ($scope.activities[i].uuid == activityID){
-                    //DANGER
+                    //Copy found activity object to temporary subobject
                     $scope.activity = angular.copy($scope.activities[i]);
+                    //Stop searching through all $scope entries
                     break;
                 }
             }
-        }
-        
+        } 
     });
 });
 

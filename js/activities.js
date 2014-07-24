@@ -79,13 +79,13 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
         //Clean form from now saved user-entered data
         this.activity = {};
         
-        //Add new entry to $scope
-        $scope.activities.push(newEntry);
-        
         //Add new entry to DB
         indexedDBexo.addEntry(newEntry).then(function(){
             console.log('Activity saved to DB!');
         });
+        
+        //Add new entry to $scope
+        $scope.activities.push(newEntry);
     }
     
     
@@ -93,10 +93,12 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
     //Edit activity entry at $scope and DB 
     $scope.editEntry = function(activity, langcode){
         var curTimestamp = new Date().getTime();
+        //Get revision number of now-previous entry revision
         var prevVersion = activity["lastVersion"];
-        //Generate current entry revision
+        //Generate current entry revision number
         var curVersion = activity["lastVersion"] + 1;
         
+        //Create temporary object to populate and push to $scope and DB
         activity[curVersion] = {};
         //At first current revision will be the same as previous
         activity[curVersion] = angular.copy(activity[activity["lastVersion"]]);
@@ -107,26 +109,26 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
         //without creation dupes, such as en: "Title" ru: "Title"
         var oldLangcode = activity[activity["lastVersion"]]["langcode"];
         if (oldLangcode != langcode){
-            //Set entry's langcode
+            //Set entry's new langcode
             activity[curVersion]["langcode"] = langcode;
-            //Title value is not an object, so it'll not be copied by reference, so it's safe to delete original title value in a new revision
+            //Create title copy with different langcode
             activity[curVersion]["title"][langcode] = activity[curVersion]["title"][oldLangcode];
+            //Title value is not an object, so it'll not be copied by reference, so it's safe to delete original title value in a new revision
             delete activity[curVersion]["title"][oldLangcode];
         }
         
-        //
+        //Set entry's new revision number
         activity["lastVersion"] = curVersion;
         //Restore now-previous version, as it was modified while user edited activity
         activity[prevVersion] = angular.copy(this.editActivityLastRev);
         
         
-        //Update entry in local DB
+        //Update entry in DB
         indexedDBexo.addEntry(activity).then(function(){
             console.log('Activity edited!');
         });
         
-        
-        
+        //Update entry at $scope
         for (var i = 0; i < $scope.activities.length; i++){
             if ($scope.activities[i].uuid == activity.uuid){        
                 //TODO:EDIT
@@ -135,13 +137,16 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
                 break;
             }
         }
-        delete this.editActivityLastRev;
-        delete activity;
         
+        //Clean form from now saved user-entered data
+        delete this.editActivityLastRev;
+        //Delete temporary object to populate and push to $scope and DB
+        delete activity;   
     }
     
     
     
+    //Delete activity entry at $scope and DB 
     $scope.deleteEntry = function(activity){        
         indexedDBexo.deleteEntry(activity).then(function(){
             $scope.activities.splice($scope.activities.indexOf(activity), 1 );

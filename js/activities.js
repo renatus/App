@@ -24,8 +24,10 @@ app.config(['$routeProvider',
 
 
 
+//Controller to work with activities
 app.controller('activitiesController', function ($scope, $q, $routeParams, indexedDBexo) {
     
+    //You can populate scope by hands if needed. This is just example, app uses different activity data structure and populates it from IndexedDB.
 	//$scope.activities = [
 	//	{"nid":"6650","langcode":"en","title":"End an agreements with Stream ISP"},
 	//	{"nid":"3188","langcode":"en","title":"Renew domain exocortex.pp.ua"}
@@ -33,12 +35,13 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
     	
 	
 	
-    //Open DB, get all entries and show them to user
+    //Open DB, get all entries and put them to $scope object
 	$scope.init = function(){
-        console.log("Init started");
+        //console.log("Init started");
 		indexedDBexo.open().then(function(){            
             indexedDBexo.getAllTodoItems().then(function(data){
 				$scope.activities = data;
+                //Will show us all objects we've get - at Chrome DevTools console
                 console.log(data);
 			});			
 		});
@@ -47,17 +50,19 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
 	$scope.init();
     
     
-        
+    //Add new activity entry to $scope and DB        
     //You can get user-entered field value without passing object to function with construction like $scope.activity.title
     $scope.addEntry = function(activity){
         var curTimestamp = new Date().getTime();
+        //Get universally unique identifier for a new entry
         var UUID4 = generateUUID4();
-        
+        //Entry language code (like 'en')
         var langcode = activity.langcode;
         
-        
+        //Create entry object
         var newEntry = {
             "uuid": UUID4,
+            //Entry is new, so revision number is "0"
             "lastVersion": 0,
             "0": {
                 "title": {},
@@ -66,7 +71,7 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
                 "modifiedTimeStamp": curTimestamp
             }
 		};
-        //Entry is new, so revision number should be "0"
+        //Entry is new, so revision number is "0"
         newEntry["0"]["title"][langcode] = activity.title;        
         
         $scope.activities.push(newEntry);

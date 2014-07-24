@@ -50,6 +50,7 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
 	$scope.init();
     
     
+    
     //Add new activity entry to $scope and DB        
     //You can get user-entered field value without passing object to function with construction like $scope.activity.title
     $scope.addEntry = function(activity){
@@ -71,22 +72,25 @@ app.controller('activitiesController', function ($scope, $q, $routeParams, index
                 "modifiedTimeStamp": curTimestamp
             }
 		};
+        //Set entry title
         //Entry is new, so revision number is "0"
         newEntry["0"]["title"][langcode] = activity.title;        
-        
-        $scope.activities.push(newEntry);
         
         //Clean form from now saved user-entered data
         this.activity = {};
         
+        //Add new entry to $scope
+        $scope.activities.push(newEntry);
+        
+        //Add new entry to DB
         indexedDBexo.addEntry(newEntry).then(function(){
-            console.log('Activity added!');
+            console.log('Activity saved to DB!');
         });
     }
     
     
     
-    //TODO:EDIT
+    //Edit activity entry at $scope and DB 
     $scope.editEntry = function(activity, langcode){
         var curTimestamp = new Date().getTime();
         var prevVersion = activity["lastVersion"];

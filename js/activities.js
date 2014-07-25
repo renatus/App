@@ -529,7 +529,6 @@ activitiesMod.directive("editActivity", function() {
 //0-7 are reserved for backward compatibility, c,d are reserved for Microsoft, and e,f are reserved for future use)
 //First number of a third part determines version - in our case it should be 4, as we use UUID version 4
 app.service('UUID4', function(){
-//function generateUUID4(){
     this.generate = function(){
     //Square brackets means we should find any character between the brackets (not necessary exact sequence)
     // /g modifier means we should search for all x an y symbols, not just the first one

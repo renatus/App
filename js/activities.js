@@ -1,6 +1,6 @@
 //Modules are used to divide huge app in a logical parts - say, activities, checkins, health reports etc. may be handled by different modules
 var app = angular.module('testApp', ['ngRoute', 'exoFilters']);
-var activitiesMod = angular.module('activitiesM', ['exoFilters', 'app']);
+var activitiesMod = angular.module('activitiesM', ['exoFilters', 'testApp']);
 
 
 

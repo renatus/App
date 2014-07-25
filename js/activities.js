@@ -60,7 +60,7 @@ activitiesMod.controller('activitiesController', function ($scope, $q, $routePar
     $scope.addEntry = function(activity){
         var curTimestamp = new Date().getTime();
         //Get universally unique identifier for a new entry
-        var UUID4 = generateUUID4();
+        var UUID4 = generateUUID4.generate();
         //Entry language code (like 'en')
         var langcode = activity.langcode;
         
@@ -530,6 +530,7 @@ activitiesMod.directive("editActivity", function() {
 //First number of a third part determines version - in our case it should be 4, as we use UUID version 4
 app.service('generateUUID4', function(){
 //function generateUUID4(){
+    this.generate = function(){
     //Square brackets means we should find any character between the brackets (not necessary exact sequence)
     // /g modifier means we should search for all x an y symbols, not just the first one
     //All found x symbols will be replaced with randomly picked hexadecimal digits (1-9, a-f) one by one
@@ -562,4 +563,6 @@ app.service('generateUUID4', function(){
     });
     
     return uuid;
+        
+    };
 });

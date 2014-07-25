@@ -29,7 +29,7 @@ app.config(['$routeProvider',
 
 
 //Controller to work with activities
-activitiesMod.controller('activitiesController', function ($scope, $q, $routeParams, indexedDBexo, generateUUID4) {
+activitiesMod.controller('activitiesController', function ($scope, $q, $routeParams, indexedDBexo, UUID4) {
     
     //You can populate scope by hands if needed. This is just example, app uses different activity data structure and populates it from IndexedDB.
 	//$scope.activities = [
@@ -60,7 +60,7 @@ activitiesMod.controller('activitiesController', function ($scope, $q, $routePar
     $scope.addEntry = function(activity){
         var curTimestamp = new Date().getTime();
         //Get universally unique identifier for a new entry
-        var UUID4 = generateUUID4.generate();
+        var UUID4 = UUID4.generate();
         //Entry language code (like 'en')
         var langcode = activity.langcode;
         
@@ -528,7 +528,7 @@ activitiesMod.directive("editActivity", function() {
 //First number of a forth part determines the variant (currently only 1 in use); If it is one of 8,9,a,b, it is correct
 //0-7 are reserved for backward compatibility, c,d are reserved for Microsoft, and e,f are reserved for future use)
 //First number of a third part determines version - in our case it should be 4, as we use UUID version 4
-app.service('generateUUID4', function(){
+app.service('UUID4', function(){
 //function generateUUID4(){
     this.generate = function(){
     //Square brackets means we should find any character between the brackets (not necessary exact sequence)

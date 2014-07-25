@@ -60,13 +60,13 @@ activitiesMod.controller('activitiesController', function ($scope, $q, $routePar
     $scope.addEntry = function(activity){
         var curTimestamp = new Date().getTime();
         //Get universally unique identifier for a new entry
-        var UUID4 = UUID4.generate();
+        var entryID = UUID4.generate();
         //Entry language code (like 'en')
         var langcode = activity.langcode;
         
         //Create entry object
         var newEntry = {
-            "uuid": UUID4,
+            "uuid": entryID,
             //Entry is new, so revision number is "0"
             "lastVersion": 0,
             "0": {

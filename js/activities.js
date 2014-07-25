@@ -43,7 +43,7 @@ activitiesMod.controller('activitiesController', function ($scope, $q, $routePar
 	$scope.init = function(){
         //console.log("Init started");
 		indexedDBexo.open().then(function(){            
-            indexedDBexo.getAllTodoItems("activities").then(function(data){
+            indexedDBexo.getEntriesSubset("activities").then(function(data){
 				$scope.activities = data;
                 //Will show us all objects we've get - at Chrome DevTools console
                 console.log(data);
@@ -429,7 +429,7 @@ app.service('indexedDBexo', function($window, $q){
     
     //Get all items of particular type
     //"entryType" argument should contain entry type name (it is a DB "table" name as well), like "activities"
-    this.getAllTodoItems = function(entryType) {
+    this.getEntriesSubset = function(entryType) {
         var deferred = $q.defer();
         
         var entriesExtracted = [];

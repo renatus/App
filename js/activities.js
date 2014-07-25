@@ -84,7 +84,7 @@ activitiesMod.controller('activitiesController', function ($scope, $q, $routePar
         this.activity = {};
         
         //Add new entry to DB
-        indexedDBexo.addEntry(newEntry).then(function(){
+        indexedDBexo.addEntry(newEntry, "activities").then(function(){
             console.log('Activity saved to DB!');
         });
         
@@ -128,7 +128,7 @@ activitiesMod.controller('activitiesController', function ($scope, $q, $routePar
         
         
         //Update entry at DB
-        indexedDBexo.addEntry(activity).then(function(){
+        indexedDBexo.addEntry(activity, "activities").then(function(){
             console.log('Activity edited!');
         });
         
@@ -154,7 +154,7 @@ activitiesMod.controller('activitiesController', function ($scope, $q, $routePar
     //Delete activity entry at $scope and DB 
     $scope.deleteEntry = function(activity){
         //Delete entry at DB
-        indexedDBexo.deleteEntry(activity).then(function(){
+        indexedDBexo.deleteEntry(activity, "activities").then(function(){
             //Delete entry at $scope
             $scope.activities.splice($scope.activities.indexOf(activity), 1 );
             console.log('Activity deleted!');
@@ -305,6 +305,7 @@ app.service('indexedDBexo', function($window, $q){
 			deferred.resolve();
 		}
 		
+        //<CODETAG:NewEntityType comment="While adding new entity type to app, add it's name here, alongside 'activities'">
 		request.onupgradeneeded = function(e) {
 			exoDB.indexedDB.db = e.target.result;
 			var db = exoDB.indexedDB.db;
@@ -335,6 +336,7 @@ app.service('indexedDBexo', function($window, $q){
 			//var store = db.createObjectStore("store2", {autoIncrement: true});
 			//console.log("Onupgradeneeded: "+ JSON.stringify(store));
 		}
+        //</CODETAG:NewEntityType>
 		
 		request.onfailure = function(e) {
 			console.error("Failed to open DB: " + e);
@@ -352,11 +354,12 @@ app.service('indexedDBexo', function($window, $q){
 	
 	
 	//Add or edit Activity entry in DB
-	this.addEntry = function(exEntry){
+    //"activities"
+	this.addEntry = function(exEntry, entryType){
 		var deferred = $q.defer();
 		
 		//Database table name
-		var dbTableName = "activities";
+		var dbTableName = entryType;
 		var db = exoDB.indexedDB.db;
 		//Create transaction, define Object stores it will cover
 		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");
@@ -391,11 +394,11 @@ app.service('indexedDBexo', function($window, $q){
     
     
     //Delete Activity entry in DB
-	this.deleteEntry = function(exEntry){
+	this.deleteEntry = function(exEntry, entryType){
 		var deferred = $q.defer();
 		
 		//Database table name
-		var dbTableName = "activities";
+		var dbTableName = entryType;
 		var db = exoDB.indexedDB.db;
 		//Create transaction, define Object stores it will cover
 		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");

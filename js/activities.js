@@ -43,7 +43,7 @@ activitiesMod.controller('activitiesController', function ($scope, $q, $routePar
 	$scope.init = function(){
         //console.log("Init started");
 		indexedDBexo.open().then(function(){            
-            indexedDBexo.getAllTodoItems().then(function(data){
+            indexedDBexo.getAllTodoItems("activities").then(function(data){
 				$scope.activities = data;
                 //Will show us all objects we've get - at Chrome DevTools console
                 console.log(data);
@@ -293,6 +293,7 @@ app.service('indexedDBexo', function($window, $q){
 	
 	
 	//Function to open DB and upgrade it's data structure, if needed
+    //This function should contain names of all types of entries we're going to store at DB, as it defines DB structure
 	this.open = function() {
 		var deferred = $q.defer();
 		
@@ -353,8 +354,10 @@ app.service('indexedDBexo', function($window, $q){
 	
 	
 	
-	//Add or edit Activity entry in DB
-    //"activities"
+	//Add or edit entry in DB
+    //This function may be used to work with entry of any type
+    //"exEntry" argument should contain object with appropriate structure to add to DB
+    //"entryType" argument should contain entry type name (it is a DB "table" name as well), like "activities"
 	this.addEntry = function(exEntry, entryType){
 		var deferred = $q.defer();
 		
@@ -393,7 +396,10 @@ app.service('indexedDBexo', function($window, $q){
     
     
     
-    //Delete Activity entry in DB
+    //Delete entry in DB
+    //This function may be used to work with entry of any type
+    //"exEntry" argument should contain object with appropriate structure to add to DB
+    //"entryType" argument should contain entry type name (it is a DB "table" name as well), like "activities"
 	this.deleteEntry = function(exEntry, entryType){
 		var deferred = $q.defer();
 		
@@ -421,13 +427,15 @@ app.service('indexedDBexo', function($window, $q){
     
     
     
-    this.getAllTodoItems = function() {
+    //Get all items of particular type
+    //"entryType" argument should contain entry type name (it is a DB "table" name as well), like "activities"
+    this.getAllTodoItems = function(entryType) {
         var deferred = $q.defer();
         
-        var activities = [];
+        var entriesExtracted = [];
         
         //Database table name
-        var dbTableName = "activities";
+        var dbTableName = entryType;
         var db = exoDB.indexedDB.db;
         //Create transaction
         var transact = db.transaction(dbTableName, "readonly");
@@ -442,10 +450,10 @@ app.service('indexedDBexo', function($window, $q){
         cursorRequest.onsuccess = function(e) {
             var result = e.target.result;
             if (result === null || result === undefined) {
-                deferred.resolve(activities);
+                deferred.resolve(entriesExtracted);
             } else {
                 if (result){
-                    activities.push(result.value);
+                    entriesExtracted.push(result.value);
                     result.continue();
                 }
             }

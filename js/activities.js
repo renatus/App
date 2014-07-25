@@ -204,14 +204,19 @@ app.controller('showActivityController', function($scope, $routeParams) {
 
 
 
-//orderBy only works with arrays, not with objects
-// http://stackoverflow.com/questions/14478106/angularjs-sorting-by-property
+//Filter to sort entries at ng-repeat list by title (title should be numeric)
+//Entries with non-numeric titles will be shown as well, but without proper sorting
+//"reverse" argument may be equal to "ascend" or "descend" - in latter case sorting order should be reversed
+//orderBy standard filter only works with arrays, not with objects
 app.filter('orderObjectByINT', function(){
     return function(input, attribute, reverse) {
+        //If input is not object, we can't process it properly
         if (!angular.isObject(input)) return input;
             
+        //Temporary array for sorting
         var array = [];
         for (var objectKey in input) {
+            //Push input object arguments to array one by one
             array.push(input[objectKey]);
         }
         
@@ -221,18 +226,27 @@ app.filter('orderObjectByINT', function(){
             return a - b;
         });
         
+        //If user asked for reverse sorting order, reverse it
         if (reverse == 'descend') array.reverse();
         
+        //Return array of sorted entries
         return array;
     }
 });
 
+//Filter to sort entries at ng-repeat list by title (title should be textual)
+//Entries with numeric titles will be shown as well, but sorted as a text ones (i.e. 12 will be placed ahead of 2)
+//"reverse" argument may be equal to "ascend" or "descend" - in latter case sorting order should be reversed
+//orderBy standard filter only works with arrays, not with objects
 app.filter('orderObjectByTXT', function(){
     return function(input, attribute, reverse) {
+        //If input is not object, we can't process it properly
         if (!angular.isObject(input)) return input;
             
+        //Temporary array for sorting
         var array = [];
         for (var objectKey in input) {
+            //Push input object arguments to array one by one
             array.push(input[objectKey]);
         }
         
@@ -244,8 +258,10 @@ app.filter('orderObjectByTXT', function(){
             return alc > blc ? 1 : alc < blc ? -1 : 0;
         });
         
+        //If user asked for reverse sorting order, reverse it
         if (reverse == 'descend') array.reverse();
         
+        //Return array of sorted entries
         return array;
     }
 });

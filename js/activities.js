@@ -29,7 +29,7 @@ app.config(['$routeProvider',
 
 
 //Controller to work with activities
-activitiesMod.controller('activitiesController', function ($scope, $q, $routeParams, indexedDBexo) {
+activitiesMod.controller('activitiesController', function ($scope, $q, $routeParams, indexedDBexo, generateUUID4) {
     
     //You can populate scope by hands if needed. This is just example, app uses different activity data structure and populates it from IndexedDB.
 	//$scope.activities = [

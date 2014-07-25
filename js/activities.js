@@ -1,5 +1,8 @@
 //Modules are used to divide huge app in a logical parts - say, activities, checkins, health reports etc. may be handled by different modules
+//"testApp" is a basic module to handle tasks, common to other modules (authentication, work with DB, etc.)
+//It should be declared as a dependency for other modules
 var app = angular.module('testApp', ['ngRoute']);
+//activitiesM is a module to handle activities
 var activitiesMod = angular.module('activitiesM', ['exoFilters', 'testApp']);
 
 
@@ -525,7 +528,8 @@ activitiesMod.directive("editActivity", function() {
 //First number of a forth part determines the variant (currently only 1 in use); If it is one of 8,9,a,b, it is correct
 //0-7 are reserved for backward compatibility, c,d are reserved for Microsoft, and e,f are reserved for future use)
 //First number of a third part determines version - in our case it should be 4, as we use UUID version 4
-function generateUUID4(){
+app.service('generateUUID4', function(){
+//function generateUUID4(){
     //Square brackets means we should find any character between the brackets (not necessary exact sequence)
     // /g modifier means we should search for all x an y symbols, not just the first one
     //All found x symbols will be replaced with randomly picked hexadecimal digits (1-9, a-f) one by one
@@ -558,4 +562,4 @@ function generateUUID4(){
     });
     
     return uuid;
-}
+});

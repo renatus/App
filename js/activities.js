@@ -300,6 +300,8 @@ activitiesMod.controller('activitiesController', function ($scope, $q, $routePar
         //console.log("Init started");
 		indexedDBexo.open().then(function(){            
             indexedDBexo.getEntriesSubset("activities").then(function(data){
+                //Even if you only have one type of entries, it's better not to add them directly to scope, but use $scope as a container for models
+                //In this case, our model is contained in "activities"
 				$scope.activities = data;
                 //Will show us all objects we've get - at Chrome DevTools console
                 console.log(data);

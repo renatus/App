@@ -528,30 +528,6 @@ activitiesMod.filter('orderObjectByTXT', function(){
 
 
 
-//Derective to generate
-/*
-activitiesMod.directive("clickToEdit", function() {
-    var editorTemplate = '<div>' + '<input type="text" value="' + '{{value}}' + '" required />' + '</div>';
-
-    return {
-        restrict: "A",
-        replace: true,
-        template: editorTemplate,
-        scope: {
-            value: "=clickToEdit",
-        },
-        controller: function($scope) {
-            
-            $scope.view = {
-                editableValue: $scope.value,
-                editorEnabled: false
-            };
-        }
-    };
-});
-*/
-
-
 //TODO:EDIT
 activitiesMod.directive("editActivity", function() {
 

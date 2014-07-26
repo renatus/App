@@ -3,7 +3,8 @@
 //It should be declared as a dependency for other modules
 var app = angular.module('testApp', ['ngRoute']);
 //activitiesM is a module to handle activities
-var activitiesMod = angular.module('activitiesM', ['exoFilters', 'testApp']);
+//var activitiesMod = angular.module('activitiesM', ['exoFilters', 'testApp']);
+var activitiesMod = angular.module('activitiesM', ['testApp']);
 
 
 
@@ -527,22 +528,22 @@ activitiesMod.filter('orderObjectByTXT', function(){
 
 
 
-angular.module('exoFilters', []).filter('reverse', function() {
-	return function(input, uppercase) {
-		input = input || '';
-		var out = "";
-		for (var i = 0; i < input.length; i++) {
-			out = input.charAt(i) + out;
-		}
+//angular.module('exoFilters', []).filter('reverse', function() {
+//	return function(input, uppercase) {
+//		input = input || '';
+//		var out = "";
+//		for (var i = 0; i < input.length; i++) {
+//			out = input.charAt(i) + out;
+//		}
 		
 		// conditional based on optional argument
-		if (uppercase) {
-			out = out.toUpperCase();
-		}
+//		if (uppercase) {
+//			out = out.toUpperCase();
+//		}
 		
-		return out;
-	};
-});
+//		return out;
+//	};
+//});
 
 
 

@@ -1,9 +1,9 @@
 //Modules are used to divide huge app in a logical parts - say, activities, checkins, health reports etc. may be handled by different modules
 //"testApp" is a basic module to handle tasks, common to other modules (authentication, work with DB, etc.)
 //It should be declared as a dependency for other modules
+//Multiple dependencies should be declared like this: ['exoFilters', 'testApp']);
 var app = angular.module('testApp', ['ngRoute']);
 //activitiesM is a module to handle activities
-//var activitiesMod = angular.module('activitiesM', ['exoFilters', 'testApp']);
 var activitiesMod = angular.module('activitiesM', ['testApp']);
 
 
@@ -528,25 +528,8 @@ activitiesMod.filter('orderObjectByTXT', function(){
 
 
 
-//angular.module('exoFilters', []).filter('reverse', function() {
-//	return function(input, uppercase) {
-//		input = input || '';
-//		var out = "";
-//		for (var i = 0; i < input.length; i++) {
-//			out = input.charAt(i) + out;
-//		}
-		
-		// conditional based on optional argument
-//		if (uppercase) {
-//			out = out.toUpperCase();
-//		}
-		
-//		return out;
-//	};
-//});
-
-
-
+//Derective to generate
+/*
 activitiesMod.directive("clickToEdit", function() {
     var editorTemplate = '<div>' + '<input type="text" value="' + '{{value}}' + '" required />' + '</div>';
 
@@ -566,7 +549,7 @@ activitiesMod.directive("clickToEdit", function() {
         }
     };
 });
-
+*/
 
 
 //TODO:EDIT

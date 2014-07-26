@@ -28,16 +28,12 @@ app.config(['$routeProvider',
 
 
 
-
-
-
-
 //Service to work with IndexedDB
 app.service('indexedDBexo', function($window, $q){
 	
 	//IndexedDB database name
 	var dbName = "ExocortexDB";
-	//Database version (should be increased, when structure updates). Should be of integer type.
+	//Database version, should be increased, when structure updates, should be of integer type
 	var dbVersion = 9;
 	var exoDB = {};
 	var indexedDB = window.indexedDB;
@@ -57,15 +53,17 @@ app.service('indexedDBexo', function($window, $q){
 	this.open = function() {
 		var deferred = $q.defer();
 		
-		//Request to open database. Will return IDBOpenDBRequest object.
+		//Request to open database, it will return IDBOpenDBRequest object
 		var request = indexedDB.open(dbName, dbVersion);
 		
+        //If request was successfull 
 		request.onsuccess = function(e) {
 			console.log ("DB " + dbName + " was opened and ready for work");
 			exoDB.indexedDB.db = e.target.result;
 			deferred.resolve();
 		}
 		
+        //If DB version changed, i.e. we need to upgrade it's structure
         //<CODETAG:NewEntityType comment="While adding new entity type to app, add it's name here, alongside 'activities'">
 		request.onupgradeneeded = function(e) {
 			exoDB.indexedDB.db = e.target.result;
@@ -99,11 +97,13 @@ app.service('indexedDBexo', function($window, $q){
 		}
         //</CODETAG:NewEntityType>
 		
+        //If request failed
 		request.onfailure = function(e) {
 			console.error("Failed to open DB: " + e);
 			deferred.reject();
 		}
 		
+        //If request gave us error
 		request.onerror = function(e) {
 			console.error("Error while opening DB: " + e);
 			deferred.reject();
@@ -118,6 +118,7 @@ app.service('indexedDBexo', function($window, $q){
     //This function may be used to work with entry of any type
     //"exEntry" argument should contain object with appropriate structure to add to DB
     //"entryType" argument should contain entry type name (it is a DB "table" name as well), like "activities"
+    //While adding objects, you can omit fields, including indexing ones, but "uuid" field should be filled
 	this.addEntry = function(exEntry, entryType){
 		var deferred = $q.defer();
 		
@@ -130,22 +131,17 @@ app.service('indexedDBexo', function($window, $q){
         
         //We should put an object to IndexedDB
         //AngularJS works with objects, so we can just put them to DB without alteration
-        
-		//var data = {
-        //  "uuid": exEntry.uuid,
-		// 	"title": exEntry.title,
-        //  "langcode": exEntry.langcode,
-		//	"createdTimeStamp": exEntry.createdTimeStamp
-		//};
 		
 		//Request to store data at DB
 		var request = store.put(exEntry);
 		
+        //If request was successfull 
 		request.onsuccess = function(e) {
 			console.log('Data added to DB');
 			deferred.resolve();
 		};
 		
+        //If request gave us error
 		request.onerror = function(e) {
 			console.error("Error Adding an item: ", e);
 			deferred.reject();
@@ -170,13 +166,16 @@ app.service('indexedDBexo', function($window, $q){
 		var transact = exoDB.indexedDB.db.transaction(dbTableName, "readwrite");
 		var store = transact.objectStore(dbTableName);
         
+        //Request to delete data from DB
         var request = store.delete(exEntry.uuid);
-
+        
+        //If request was successfull
 		request.onsuccess = function(e) {
 			console.log('Entry deleted from DB');
 			deferred.resolve();
 		};
 		
+        //If request gave us error
 		request.onerror = function(e) {
 			console.error("Error deleting an entry: ", e);
 			deferred.reject();
@@ -187,11 +186,12 @@ app.service('indexedDBexo', function($window, $q){
     
     
     
-    //Get all items of particular type
+    //Get all items of particular type, say, all activities
     //"entryType" argument should contain entry type name (it is a DB "table" name as well), like "activities"
     this.getEntriesSubset = function(entryType) {
         var deferred = $q.defer();
         
+        //Array for entries, extracted from DB
         var entriesExtracted = [];
         
         //Database table name
@@ -207,18 +207,24 @@ app.service('indexedDBexo', function($window, $q){
         //Cursor is a mechanism for iterating over multiple records within a key range
         var cursorRequest = store.openCursor(keyRange);
         
+        //If request was successfull
         cursorRequest.onsuccess = function(e) {
             var result = e.target.result;
+            //If we've iterated through all extracted entries
             if (result === null || result === undefined) {
+                //Return array with these entries
                 deferred.resolve(entriesExtracted);
             } else {
                 if (result){
+                    //Add extracted entry to array for such entries
                     entriesExtracted.push(result.value);
+                    //Continue to next entry
                     result.continue();
                 }
             }
         };
         
+        //If request gave us error
         cursorRequest.onerror = function(e){
             console.log(e.value);
             deferred.reject("Something went wrong!!!");

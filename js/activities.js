@@ -464,6 +464,29 @@ activitiesMod.controller('showActivityController', function($scope, $routeParams
 
 
 
+//Directive to generate activity edit form
+activitiesMod.directive("editActivity", function() {
+
+    return {
+        //Directive can be used as (element) Attribute or (custom) Element
+        restrict: "AE",
+        replace: true,
+        //template: editorTemplate,
+        //Form HTML template
+        templateUrl: "templates/edit-activity.html",
+        controller: function($scope) {
+            //We have to copy activity subobject to bind it to edit form - to prevent changes from taking immediate effect, prior to pressing Save button
+            //If we'll modify activity directly, entry and edit form may disappear, if modified entry should be hidden by ng-repeat filters
+            $scope.editActivity = angular.copy($scope.activity);
+            $scope.editActivityLangcode = angular.copy($scope['activity'][$scope['activity']['lastVersion']]['langcode']);
+            $scope.editActivityLastRev = angular.copy($scope['activity'][$scope['activity']['lastVersion']]);
+            
+        }
+    };
+});
+
+
+
 //Filter to sort entries at ng-repeat list by title (title should be numeric)
 //Entries with non-numeric titles will be shown as well, but without proper sorting
 //"reverse" argument may be equal to "ascend" or "descend" - in latter case sorting order should be reversed
@@ -524,24 +547,4 @@ activitiesMod.filter('orderObjectByTXT', function(){
         //Return array of sorted entries
         return array;
     }
-});
-
-
-
-//TODO:EDIT
-activitiesMod.directive("editActivity", function() {
-
-    return {
-        //Directive can be used as (element) Attribute or (custom) Element
-        restrict: "AE",
-        replace: true,
-        //template: editorTemplate,
-        templateUrl: "templates/edit-activity.html",
-        controller: function($scope) {            
-            $scope.editActivity = angular.copy($scope.activity);
-            $scope.editActivityLangcode = angular.copy($scope['activity'][$scope['activity']['lastVersion']]['langcode']);
-            $scope.editActivityLastRev = angular.copy($scope['activity'][$scope['activity']['lastVersion']]);
-            
-        }
-    };
 });

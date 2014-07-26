@@ -244,38 +244,38 @@ app.service('indexedDBexo', function($window, $q){
 //First number of a third part determines version - in our case it should be 4, as we use UUID version 4
 app.service('UUID4', function(){
     this.generate = function(){
-    //Square brackets means we should find any character between the brackets (not necessary exact sequence)
-    // /g modifier means we should search for all x an y symbols, not just the first one
-    //All found x symbols will be replaced with randomly picked hexadecimal digits (1-9, a-f) one by one
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        //Square brackets means we should find any character between the brackets (not necessary exact sequence)
+        // /g modifier means we should search for all x an y symbols, not just the first one
+        //All found x symbols will be replaced with randomly picked hexadecimal digits (1-9, a-f) one by one
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            
+            //Math.random will give us not that random results, so UUID collisions are possible
+            //It is preferable to use window.crypto.getRandomValues() function - it gives cryptographically-grade pseudo-random values
+            //window.crypto.getRandomValues() is not available in older browsers, so we should fallback to Math.random() if needed
+            //randNum variable should contain number between 0 and 15
+            var randNum = "";
+            //if window.crypto.getRandomValues() is available
+            if (window.crypto){
+                //Create one-element array (counting starts from 1, not from 0).
+                var randArr = new Uint32Array(1);
+                //Each array element will be populated with random value (like 3479190651), so you can get many numbers in a time.
+                window.crypto.getRandomValues(randArr);
+                //% will give us division remainder, in our case it will be a number between 0 and 15
+                randNum = randArr[0] % 16;
+            } else {
+                //Math.random() will give us pseudorandom number between 0 and 1
+                // |0 - bitwise operation OR, it will drop fraction part of the number
+                randNum = Math.random() * 16|0;
+            }
+            
+            //v = c == 'x'  - if current replaceable symbol is not equal to x
+            //r : (r&0x3|0x8)  - v will be populated with hexadecimal number between 8 and 11 (i.e. 8, 9, a or b)
+            var r = randNum, v = c == 'x' ? r : (r&0x3|0x8);
+            //Conversion of hexadecimal number to string (i.e. to one of these symbols: 1-9, a-f)
+            return v.toString(16);
+        });
         
-        //Math.random will give us not that random results, so UUID collisions are possible
-        //It is preferable to use window.crypto.getRandomValues() function - it gives cryptographically-grade pseudo-random values
-        //window.crypto.getRandomValues() is not available in older browsers, so we should fallback to Math.random() if needed
-        //randNum variable should contain number between 0 and 15
-        var randNum = "";
-        //if window.crypto.getRandomValues() is available
-        if (window.crypto){
-            //Create one-element array (counting starts from 1, not from 0). 
-            var randArr = new Uint32Array(1);
-            //Each array element will be populated with random value (like 3479190651), so you can get many numbers in a time.
-            window.crypto.getRandomValues(randArr);
-            //% will give us division remainder, in our case it will be a number between 0 and 15
-            randNum = randArr[0] % 16;
-        } else {
-            //Math.random() will give us pseudorandom number between 0 and 1
-            // |0 - bitwise operation OR, it will drop fraction part of the number
-            randNum = Math.random() * 16|0;
-        }
-        
-        //v = c == 'x'  - if current replaceable symbol is not equal to x
-        //r : (r&0x3|0x8)  - v will be populated with hexadecimal number between 8 and 11 (i.e. 8, 9, a or b)
-        var r = randNum, v = c == 'x' ? r : (r&0x3|0x8);
-        //Conversion of hexadecimal number to string (i.e. to one of these symbols: 1-9, a-f)
-        return v.toString(16);
-    });
-    
-    return uuid;
+        return uuid;
         
     };
 });
